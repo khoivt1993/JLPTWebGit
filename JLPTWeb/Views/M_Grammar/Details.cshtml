@@ -1,0 +1,43 @@
+﻿@model JLPTWeb.Models.M_Grammar
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('a.dropdown-toggle').addClass('active');
+        });
+</script>
+<div id="html-content-holder" class ="card">
+    <div class="container-fluid">
+        <h4 style="color:orange">@Html.DisplayFor(model => model.GrammarName)</h4>
+        <hr />
+        <div>
+            @MvcHtmlString.Create(Model.FullVN.Replace("@CT@", "<h4 style='color: red'>接続</h4>")
+           .Replace("@YN@", "<h4 style='color: red'>意味</h4>").Replace("@VD@", "<h4 style='color: red'>例文</h4>"))
+        </div>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+<div id="previewImage"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+    <script>
+        $(document).ready(function () {
+            var element = $("#html-content-holder"); // global variable
+            var getCanvas; // global variable
+            html2canvas(element, {
+                onrendered: function (canvas) {
+                    element.remove();
+                    $("#previewImage").append(canvas);
+                    getCanvas = canvas;
+                    
+                }
+            });
+        });
+
+    </script>

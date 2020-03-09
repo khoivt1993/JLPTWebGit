@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a10b9a4808bc4fd091b34b2335340bbf" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Alphabet" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Comp" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Country" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Kanji" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_KanjiExam" Width="1.5" PointX="7.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Level" Width="1.5" PointX="0.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Like" Width="1.5" PointX="10.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Mean" Width="1.5" PointX="5.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Role" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Sen_Mean" Width="1.5" PointX="10.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Sentence" Width="1.5" PointX="5.25" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Topic" Width="1.5" PointX="7.5" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_TopicSentence" Width="1.5" PointX="12.75" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_TopicVoc" Width="1.5" PointX="5.25" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_TopicVocDetail" Width="1.5" PointX="15" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_User" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Voc_Mean" Width="1.5" PointX="7.5" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Voc_Sen" Width="1.5" PointX="12.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_Vocabulary" Width="1.5" PointX="5.25" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.B_News" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_Grammar" Width="1.5" PointX="10" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarJP" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarN1" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarN2" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarN3" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarN4" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GrammarN5" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_GroupByBook" Width="1.5" PointX="10" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_Level" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_Setting" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.M_Compare" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Alphabet_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Comp_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Country_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Topic_A_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Kanji_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_KanjiExam_A_Kanji1" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_KanjiExam_A_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_User_A_Level" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Like_A_Sen_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Like_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Mean_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sen_Mean_A_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Mean_A_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_User_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sen_Mean_A_Sen_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sen_Mean_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sen_Mean_A_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicSentence_A_Sen_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Sen_A_Voc_Mean" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sentence_A_Sentence" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sentence_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Sentence_A_UserAppr" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Topic_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicSentence_A_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicSentence_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicVoc_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicVocDetail_A_TopicVoc" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicVocDetail_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_TopicVocDetail_A_Voc_Sen" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Mean_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Mean_A_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Sen_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Vocabulary_A_User" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Mean_A_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Sen_A_Voc_Sen" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_M_Grammar_M_Level" ManuallyRouted="false" />
+        <AssociationConnector Association="JLPTDatabaseDataModel.FK_M_GroupByBook_M_Level" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,54 @@
+﻿@model JLPTWeb.Models.A_User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well text-left" style="margin-top: 80px">
+        <div class="well" style="background-color: white;">
+            <div class="wrap" style="border:none">
+                <h2 class="title">Đăng kí tài khoản mới</h2>
+                <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Mật khẩu" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Nhập lại mật khẩu" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error">
+                    @if (@ViewBag.NotValidUser != null)
+                    {
+
+                        <label class = "text-danger"> @ViewBag.NotValidUser</label>
+                    }
+                </div>
+                <button type="submit" class="btn btn-danger btn-fill pull-right">Đăng kí</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-3"></div>
+}

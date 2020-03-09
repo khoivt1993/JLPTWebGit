@@ -1,0 +1,2929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JLPTDatabaseDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="A_Alphabet">
+          <Key>
+            <PropertyRef Name="AlphabetId" />
+          </Key>
+          <Property Name="AlphabetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Romaji" Type="varchar" MaxLength="50" />
+          <Property Name="Hiragana" Type="nvarchar" MaxLength="50" />
+          <Property Name="HiraganaImg" Type="varchar" MaxLength="100" />
+          <Property Name="Katakana" Type="nvarchar" MaxLength="50" />
+          <Property Name="KatakanaImg" Type="varchar" MaxLength="100" />
+          <Property Name="GroupSort" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Comp">
+          <Key>
+            <PropertyRef Name="CompId" />
+          </Key>
+          <Property Name="CompId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompMean" Type="nvarchar" MaxLength="500" />
+          <Property Name="CompMeanDetail" Type="nvarchar" MaxLength="500" />
+          <Property Name="CompKun" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompOn" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompImageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompStrokes" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountrySign" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Kanji">
+          <Key>
+            <PropertyRef Name="KanjiId" />
+          </Key>
+          <Property Name="KanjiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KanjiContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiMean" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiMeanDetail" Type="nvarchar(max)" />
+          <Property Name="KanjiOn" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiKun" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiImgUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiStrokes" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_KanjiExam">
+          <Key>
+            <PropertyRef Name="KanjiExId" />
+          </Key>
+          <Property Name="KanjiExId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KanjiId" Type="int" />
+          <Property Name="KanjiMean" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiMeanDetail" Type="nvarchar" MaxLength="500" />
+          <Property Name="Higarana" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanjiContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Level">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Like">
+          <Key>
+            <PropertyRef Name="LikeId" />
+          </Key>
+          <Property Name="LikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SenMeanId" Type="bigint" Nullable="false" />
+          <Property Name="LikeFlag" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Mean">
+          <Key>
+            <PropertyRef Name="MeanId" />
+          </Key>
+          <Property Name="MeanId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeanContent" Type="nvarchar(max)" />
+          <Property Name="ContentSearch" Type="nvarchar(max)" />
+          <Property Name="ContentFormat" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Sen_Mean">
+          <Key>
+            <PropertyRef Name="SenMeanId" />
+          </Key>
+          <Property Name="SenMeanId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SentenceId" Type="bigint" />
+          <Property Name="MeanId" Type="bigint" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="ApproveUserId" Type="int" />
+          <Property Name="ApproveFlag" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Sentence">
+          <Key>
+            <PropertyRef Name="SentenceId" />
+          </Key>
+          <Property Name="SentenceId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sentence" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ApproveUserId" Type="int" Nullable="false" />
+          <Property Name="ApproveFlag" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="SenSearch" Type="nvarchar(max)" />
+          <Property Name="SenFormat" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="A_Topic">
+          <Key>
+            <PropertyRef Name="TopicId" />
+          </Key>
+          <Property Name="TopicId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_TopicSentence">
+          <Key>
+            <PropertyRef Name="TopicSentenceId" />
+          </Key>
+          <Property Name="TopicSentenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicId" Type="int" Nullable="false" />
+          <Property Name="SenMeanId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_TopicVoc">
+          <Key>
+            <PropertyRef Name="TopicVocId" />
+          </Key>
+          <Property Name="TopicVocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_TopicVocDetail">
+          <Key>
+            <PropertyRef Name="TopicVocDetailId" />
+          </Key>
+          <Property Name="TopicVocDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicVocId" Type="int" />
+          <Property Name="VocMeanId" Type="bigint" />
+          <Property Name="SenMeanId" Type="bigint" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Sex" Type="varchar" MaxLength="10" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ActiveFlag" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="AboutMe" Type="nvarchar" MaxLength="500" />
+          <Property Name="Avatar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="A_Voc_Mean">
+          <Key>
+            <PropertyRef Name="VocMeanId" />
+          </Key>
+          <Property Name="VocMeanId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VocId" Type="bigint" />
+          <Property Name="MeanId" Type="bigint" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="ApproveUserId" Type="int" />
+          <Property Name="ApproveFlag" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Voc_Sen">
+          <Key>
+            <PropertyRef Name="VocMeanId" />
+            <PropertyRef Name="SenMeanId" />
+          </Key>
+          <Property Name="VocMeanId" Type="bigint" Nullable="false" />
+          <Property Name="SenMeanId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="A_Vocabulary">
+          <Key>
+            <PropertyRef Name="VocId" />
+          </Key>
+          <Property Name="VocId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VocContent" Type="nvarchar" MaxLength="250" />
+          <Property Name="VocContentFormat" Type="nvarchar" MaxLength="500" />
+          <Property Name="VocKanji" Type="nvarchar" MaxLength="250" />
+          <Property Name="VocHiragana" Type="nvarchar" MaxLength="250" />
+          <Property Name="VocRomaji" Type="nvarchar" MaxLength="250" />
+          <Property Name="VocKind" Type="nvarchar" MaxLength="100" />
+          <Property Name="ApproveUserId" Type="int" />
+          <Property Name="ApproveFlag" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="B_News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="NewContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TitleWithRuby" Type="nvarchar(max)" />
+          <Property Name="NewContentWithRuby" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="250" />
+          <Property Name="MoviePath" Type="varchar" MaxLength="250" />
+          <Property Name="NewIdNHK" Type="varchar" MaxLength="50" />
+          <Property Name="NewsDate" Type="datetime" />
+          <Property Name="NewsWebUrl" Type="varchar" MaxLength="250" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="M_Compare">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="GrammarName" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Grammar">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="LevelID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarJP">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="int" Nullable="false" />
+          <Property Name="SubID" Type="int" Nullable="false" />
+          <Property Name="LevelID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mean" Type="nvarchar" MaxLength="200" />
+          <Property Name="Full" Type="nvarchar" MaxLength="1" />
+          <Property Name="Yobi_1" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_5" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarN1">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarN2">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarN3">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarN4">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GrammarN5">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="GrammarName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Struct" Type="nvarchar" MaxLength="200" />
+          <Property Name="MeanVN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MeanEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullVN" Type="nvarchar(max)" />
+          <Property Name="FullEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FullJP" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Group" Type="varchar" MaxLength="2" />
+          <Property Name="SearchKey" Type="nvarchar" MaxLength="200" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_GroupByBook">
+          <Key>
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="BookID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="LevelID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="BookName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Yobi_1" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_2" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_3" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_4" Type="varchar" MaxLength="1" />
+          <Property Name="Yobi_5" Type="varchar" MaxLength="1" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="UpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Level">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="M_Setting">
+          <Key>
+            <PropertyRef Name="SettingKey" />
+          </Key>
+          <Property Name="SettingKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingValue" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_A_Alphabet_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Alphabet" Type="Self.A_Alphabet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Alphabet">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Comp_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Comp" Type="Self.A_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Comp">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Country_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Country" Type="Self.A_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Country">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Kanji_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Kanji" Type="Self.A_Kanji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Kanji">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_KanjiExam_A_Kanji1">
+          <End Role="A_Kanji" Type="Self.A_Kanji" Multiplicity="0..1" />
+          <End Role="A_KanjiExam" Type="Self.A_KanjiExam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Kanji">
+              <PropertyRef Name="KanjiId" />
+            </Principal>
+            <Dependent Role="A_KanjiExam">
+              <PropertyRef Name="KanjiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_KanjiExam_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_KanjiExam" Type="Self.A_KanjiExam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_KanjiExam">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Like_A_Sen_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_Like" Type="Self.A_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_Like">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Like_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Like" Type="Self.A_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_Mean">
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Mean">
+              <PropertyRef Name="MeanId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="MeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_Sentence">
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sentence">
+              <PropertyRef Name="SentenceId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="SentenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sentence_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sentence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sentence_A_UserAppr">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sentence">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Topic_A_Country">
+          <End Role="A_Country" Type="Self.A_Country" Multiplicity="1" />
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="A_Topic">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Topic_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Topic">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_Sen_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_Topic">
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Topic">
+              <PropertyRef Name="TopicId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVoc_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_TopicVoc" Type="Self.A_TopicVoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicVoc">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_TopicVoc">
+          <End Role="A_TopicVoc" Type="Self.A_TopicVoc" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_TopicVoc">
+              <PropertyRef Name="TopicVocId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="TopicVocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_Voc_Sen">
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Voc_Sen">
+              <PropertyRef Name="VocMeanId" />
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="VocMeanId" />
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_User_A_Level">
+          <End Role="A_Level" Type="Self.A_Level" Multiplicity="0..1" />
+          <End Role="A_User" Type="Self.A_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="A_User">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_User_A_User">
+          <End Role="A_Role" Type="Self.A_Role" Multiplicity="1" />
+          <End Role="A_User" Type="Self.A_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="A_User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_Mean">
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Mean">
+              <PropertyRef Name="MeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="MeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_Vocabulary">
+          <End Role="A_Vocabulary" Type="Self.A_Vocabulary" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Vocabulary">
+              <PropertyRef Name="VocId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="VocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_Voc_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_Voc_Sen">
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Voc_Mean">
+              <PropertyRef Name="VocMeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="VocMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Vocabulary_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Vocabulary" Type="Self.A_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Vocabulary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_Grammar_M_Level">
+          <End Role="M_Level" Type="Self.M_Level" Multiplicity="1" />
+          <End Role="M_Grammar" Type="Self.M_Grammar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="M_Grammar">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_GroupByBook_M_Level">
+          <End Role="M_Level" Type="Self.M_Level" Multiplicity="1" />
+          <End Role="M_GroupByBook" Type="Self.M_GroupByBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="M_GroupByBook">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JLPTDatabaseDataModelStoreContainer">
+          <EntitySet Name="A_Alphabet" EntityType="Self.A_Alphabet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Comp" EntityType="Self.A_Comp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Country" EntityType="Self.A_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Kanji" EntityType="Self.A_Kanji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_KanjiExam" EntityType="Self.A_KanjiExam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Level" EntityType="Self.A_Level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Like" EntityType="Self.A_Like" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Mean" EntityType="Self.A_Mean" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Role" EntityType="Self.A_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Sen_Mean" EntityType="Self.A_Sen_Mean" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Sentence" EntityType="Self.A_Sentence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Topic" EntityType="Self.A_Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_TopicSentence" EntityType="Self.A_TopicSentence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_TopicVoc" EntityType="Self.A_TopicVoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_TopicVocDetail" EntityType="Self.A_TopicVocDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_User" EntityType="Self.A_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Voc_Mean" EntityType="Self.A_Voc_Mean" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Voc_Sen" EntityType="Self.A_Voc_Sen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Vocabulary" EntityType="Self.A_Vocabulary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_News" EntityType="Self.B_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Grammar" EntityType="Self.M_Grammar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarJP" EntityType="Self.M_GrammarJP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarN1" EntityType="Self.M_GrammarN1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarN2" EntityType="Self.M_GrammarN2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarN3" EntityType="Self.M_GrammarN3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarN4" EntityType="Self.M_GrammarN4" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GrammarN5" EntityType="Self.M_GrammarN5" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_GroupByBook" EntityType="Self.M_GroupByBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Level" EntityType="Self.M_Level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Setting" EntityType="Self.M_Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Compare" EntityType="Self.M_Compare" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_Compare].[GrammarID] AS [GrammarID], 
+    [M_Compare].[BookID] AS [BookID], 
+    [M_Compare].[GrammarName] AS [GrammarName], 
+    [M_Compare].[Struct] AS [Struct], 
+    [M_Compare].[MeanVN] AS [MeanVN], 
+    [M_Compare].[MeanEN] AS [MeanEN], 
+    [M_Compare].[FullVN] AS [FullVN], 
+    [M_Compare].[FullEN] AS [FullEN], 
+    [M_Compare].[FullJP] AS [FullJP], 
+    [M_Compare].[Relationship] AS [Relationship], 
+    [M_Compare].[Group] AS [Group], 
+    [M_Compare].[SearchKey] AS [SearchKey], 
+    [M_Compare].[Yobi_2] AS [Yobi_2], 
+    [M_Compare].[Yobi_3] AS [Yobi_3], 
+    [M_Compare].[Yobi_4] AS [Yobi_4], 
+    [M_Compare].[InsDate] AS [InsDate], 
+    [M_Compare].[UpdDate] AS [UpdDate]
+    FROM [dbo].[M_Compare] AS [M_Compare]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_A_Alphabet_A_User" Association="Self.FK_A_Alphabet_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Alphabet" EntitySet="A_Alphabet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Comp_A_User" Association="Self.FK_A_Comp_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Comp" EntitySet="A_Comp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Country_A_User" Association="Self.FK_A_Country_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Country" EntitySet="A_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Kanji_A_User" Association="Self.FK_A_Kanji_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Kanji" EntitySet="A_Kanji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_KanjiExam_A_Kanji1" Association="Self.FK_A_KanjiExam_A_Kanji1">
+            <End Role="A_Kanji" EntitySet="A_Kanji" />
+            <End Role="A_KanjiExam" EntitySet="A_KanjiExam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_KanjiExam_A_User1" Association="Self.FK_A_KanjiExam_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_KanjiExam" EntitySet="A_KanjiExam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Like_A_Sen_Mean" Association="Self.FK_A_Like_A_Sen_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_Like" EntitySet="A_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Like_A_User" Association="Self.FK_A_Like_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Like" EntitySet="A_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Mean_A_User" Association="Self.FK_A_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Mean" EntitySet="A_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_Mean" Association="Self.FK_A_Sen_Mean_A_Mean">
+            <End Role="A_Mean" EntitySet="A_Mean" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_Sentence" Association="Self.FK_A_Sen_Mean_A_Sentence">
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_User" Association="Self.FK_A_Sen_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_User1" Association="Self.FK_A_Sen_Mean_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sentence_A_User" Association="Self.FK_A_Sentence_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sentence_A_UserAppr" Association="Self.FK_A_Sentence_A_UserAppr">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Topic_A_Country" Association="Self.FK_A_Topic_A_Country">
+            <End Role="A_Country" EntitySet="A_Country" />
+            <End Role="A_Topic" EntitySet="A_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Topic_A_User" Association="Self.FK_A_Topic_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Topic" EntitySet="A_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_Sen_Mean" Association="Self.FK_A_TopicSentence_A_Sen_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_Topic" Association="Self.FK_A_TopicSentence_A_Topic">
+            <End Role="A_Topic" EntitySet="A_Topic" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_User" Association="Self.FK_A_TopicSentence_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVoc_A_User" Association="Self.FK_A_TopicVoc_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicVoc" EntitySet="A_TopicVoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_TopicVoc" Association="Self.FK_A_TopicVocDetail_A_TopicVoc">
+            <End Role="A_TopicVoc" EntitySet="A_TopicVoc" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_User" Association="Self.FK_A_TopicVocDetail_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_Voc_Sen" Association="Self.FK_A_TopicVocDetail_A_Voc_Sen">
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_User_A_Level" Association="Self.FK_A_User_A_Level">
+            <End Role="A_Level" EntitySet="A_Level" />
+            <End Role="A_User" EntitySet="A_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_User_A_User" Association="Self.FK_A_User_A_User">
+            <End Role="A_Role" EntitySet="A_Role" />
+            <End Role="A_User" EntitySet="A_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_Mean" Association="Self.FK_A_Voc_Mean_A_Mean">
+            <End Role="A_Mean" EntitySet="A_Mean" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_User" Association="Self.FK_A_Voc_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_User1" Association="Self.FK_A_Voc_Mean_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_Vocabulary" Association="Self.FK_A_Voc_Mean_A_Vocabulary">
+            <End Role="A_Vocabulary" EntitySet="A_Vocabulary" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_User" Association="Self.FK_A_Voc_Sen_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_Voc_Mean" Association="Self.FK_A_Voc_Sen_A_Voc_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_Voc_Sen" Association="Self.FK_A_Voc_Sen_A_Voc_Sen">
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Vocabulary_A_User" Association="Self.FK_A_Vocabulary_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Vocabulary" EntitySet="A_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_Grammar_M_Level" Association="Self.FK_M_Grammar_M_Level">
+            <End Role="M_Level" EntitySet="M_Level" />
+            <End Role="M_Grammar" EntitySet="M_Grammar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_GroupByBook_M_Level" Association="Self.FK_M_GroupByBook_M_Level">
+            <End Role="M_Level" EntitySet="M_Level" />
+            <End Role="M_GroupByBook" EntitySet="M_GroupByBook" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JLPTDatabaseDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="A_Alphabet">
+          <Key>
+            <PropertyRef Name="AlphabetId" />
+          </Key>
+          <Property Name="AlphabetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Romaji" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hiragana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HiraganaImg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Katakana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KatakanaImg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GroupSort" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Alphabet_A_User" FromRole="A_Alphabet" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Comp">
+          <Key>
+            <PropertyRef Name="CompId" />
+          </Key>
+          <Property Name="CompId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompMean" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CompMeanDetail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CompKun" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompOn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompStrokes" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Comp_A_User" FromRole="A_Comp" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountrySign" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Country_A_User" FromRole="A_Country" ToRole="A_User" />
+          <NavigationProperty Name="A_Topic" Relationship="Self.FK_A_Topic_A_Country" FromRole="A_Country" ToRole="A_Topic" />
+        </EntityType>
+        <EntityType Name="A_Kanji">
+          <Key>
+            <PropertyRef Name="KanjiId" />
+          </Key>
+          <Property Name="KanjiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KanjiContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiMean" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiMeanDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiOn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiKun" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiImgUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiStrokes" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Kanji_A_User" FromRole="A_Kanji" ToRole="A_User" />
+          <NavigationProperty Name="A_KanjiExam" Relationship="Self.FK_A_KanjiExam_A_Kanji1" FromRole="A_Kanji" ToRole="A_KanjiExam" />
+        </EntityType>
+        <EntityType Name="A_KanjiExam">
+          <Key>
+            <PropertyRef Name="KanjiExId" />
+          </Key>
+          <Property Name="KanjiExId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KanjiId" Type="Int32" />
+          <Property Name="KanjiMean" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiMeanDetail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Higarana" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanjiContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Kanji" Relationship="Self.FK_A_KanjiExam_A_Kanji1" FromRole="A_KanjiExam" ToRole="A_Kanji" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_KanjiExam_A_User1" FromRole="A_KanjiExam" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Level">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_User_A_Level" FromRole="A_Level" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Like">
+          <Key>
+            <PropertyRef Name="LikeId" />
+          </Key>
+          <Property Name="LikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SenMeanId" Type="Int64" Nullable="false" />
+          <Property Name="LikeFlag" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_Like_A_Sen_Mean" FromRole="A_Like" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Like_A_User" FromRole="A_Like" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Mean">
+          <Key>
+            <PropertyRef Name="MeanId" />
+          </Key>
+          <Property Name="MeanId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeanContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentFormat" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Mean_A_User" FromRole="A_Mean" ToRole="A_User" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_Sen_Mean_A_Mean" FromRole="A_Mean" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_Voc_Mean" Relationship="Self.FK_A_Voc_Mean_A_Mean" FromRole="A_Mean" ToRole="A_Voc_Mean" />
+        </EntityType>
+        <EntityType Name="A_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_User_A_User" FromRole="A_Role" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Sen_Mean">
+          <Key>
+            <PropertyRef Name="SenMeanId" />
+          </Key>
+          <Property Name="SenMeanId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SentenceId" Type="Int64" />
+          <Property Name="MeanId" Type="Int64" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="ApproveUserId" Type="Int32" />
+          <Property Name="ApproveFlag" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Like" Relationship="Self.FK_A_Like_A_Sen_Mean" FromRole="A_Sen_Mean" ToRole="A_Like" />
+          <NavigationProperty Name="A_Mean" Relationship="Self.FK_A_Sen_Mean_A_Mean" FromRole="A_Sen_Mean" ToRole="A_Mean" />
+          <NavigationProperty Name="A_Sentence" Relationship="Self.FK_A_Sen_Mean_A_Sen_Mean" FromRole="A_Sen_Mean" ToRole="A_Sentence" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Sen_Mean_A_User" FromRole="A_Sen_Mean" ToRole="A_User" />
+          <NavigationProperty Name="A_User1" Relationship="Self.FK_A_Sen_Mean_A_User1" FromRole="A_Sen_Mean" ToRole="A_User" />
+          <NavigationProperty Name="A_TopicSentence" Relationship="Self.FK_A_TopicSentence_A_Sen_Mean" FromRole="A_Sen_Mean" ToRole="A_TopicSentence" />
+          <NavigationProperty Name="A_Voc_Sen" Relationship="Self.FK_A_Voc_Sen_A_Voc_Mean" FromRole="A_Sen_Mean" ToRole="A_Voc_Sen" />
+        </EntityType>
+        <EntityType Name="A_Sentence">
+          <Key>
+            <PropertyRef Name="SentenceId" />
+          </Key>
+          <Property Name="SentenceId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sentence" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ApproveUserId" Type="Int32" Nullable="false" />
+          <Property Name="ApproveFlag" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <Property Name="SenSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SenFormat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_Sen_Mean_A_Sen_Mean" FromRole="A_Sentence" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Sentence_A_Sentence" FromRole="A_Sentence" ToRole="A_User" />
+          <NavigationProperty Name="A_User1" Relationship="Self.FK_A_Sentence_A_User" FromRole="A_Sentence" ToRole="A_User" />
+          <NavigationProperty Name="A_User2" Relationship="Self.FK_A_Sentence_A_UserAppr" FromRole="A_Sentence" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_Topic">
+          <Key>
+            <PropertyRef Name="TopicId" />
+          </Key>
+          <Property Name="TopicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Country" Relationship="Self.FK_A_Topic_A_Country" FromRole="A_Topic" ToRole="A_Country" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Topic_A_User" FromRole="A_Topic" ToRole="A_User" />
+          <NavigationProperty Name="A_TopicSentence" Relationship="Self.FK_A_TopicSentence_A_Topic" FromRole="A_Topic" ToRole="A_TopicSentence" />
+        </EntityType>
+        <EntityType Name="A_TopicSentence">
+          <Key>
+            <PropertyRef Name="TopicSentenceId" />
+          </Key>
+          <Property Name="TopicSentenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicId" Type="Int32" Nullable="false" />
+          <Property Name="SenMeanId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_TopicSentence_A_Sen_Mean" FromRole="A_TopicSentence" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_Topic" Relationship="Self.FK_A_TopicSentence_A_Topic" FromRole="A_TopicSentence" ToRole="A_Topic" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_TopicSentence_A_User" FromRole="A_TopicSentence" ToRole="A_User" />
+        </EntityType>
+        <EntityType Name="A_TopicVoc">
+          <Key>
+            <PropertyRef Name="TopicVocId" />
+          </Key>
+          <Property Name="TopicVocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_TopicVoc_A_User" FromRole="A_TopicVoc" ToRole="A_User" />
+          <NavigationProperty Name="A_TopicVocDetail" Relationship="Self.FK_A_TopicVocDetail_A_TopicVoc" FromRole="A_TopicVoc" ToRole="A_TopicVocDetail" />
+        </EntityType>
+        <EntityType Name="A_TopicVocDetail">
+          <Key>
+            <PropertyRef Name="TopicVocDetailId" />
+          </Key>
+          <Property Name="TopicVocDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicVocId" Type="Int32" />
+          <Property Name="VocMeanId" Type="Int64" />
+          <Property Name="SenMeanId" Type="Int64" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_TopicVoc" Relationship="Self.FK_A_TopicVocDetail_A_TopicVoc" FromRole="A_TopicVocDetail" ToRole="A_TopicVoc" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_TopicVocDetail_A_User" FromRole="A_TopicVocDetail" ToRole="A_User" />
+          <NavigationProperty Name="A_Voc_Sen" Relationship="Self.FK_A_TopicVocDetail_A_Voc_Sen" FromRole="A_TopicVocDetail" ToRole="A_Voc_Sen" />
+        </EntityType>
+        <EntityType Name="A_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ActiveFlag" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <Property Name="LevelId" Type="Int32" />
+          <Property Name="AboutMe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="A_Alphabet" Relationship="Self.FK_A_Alphabet_A_User" FromRole="A_User" ToRole="A_Alphabet" />
+          <NavigationProperty Name="A_Comp" Relationship="Self.FK_A_Comp_A_User" FromRole="A_User" ToRole="A_Comp" />
+          <NavigationProperty Name="A_Country" Relationship="Self.FK_A_Country_A_User" FromRole="A_User" ToRole="A_Country" />
+          <NavigationProperty Name="A_Kanji" Relationship="Self.FK_A_Kanji_A_User" FromRole="A_User" ToRole="A_Kanji" />
+          <NavigationProperty Name="A_KanjiExam" Relationship="Self.FK_A_KanjiExam_A_User1" FromRole="A_User" ToRole="A_KanjiExam" />
+          <NavigationProperty Name="A_Level" Relationship="Self.FK_A_User_A_Level" FromRole="A_User" ToRole="A_Level" />
+          <NavigationProperty Name="A_Like" Relationship="Self.FK_A_Like_A_User" FromRole="A_User" ToRole="A_Like" />
+          <NavigationProperty Name="A_Mean" Relationship="Self.FK_A_Mean_A_User" FromRole="A_User" ToRole="A_Mean" />
+          <NavigationProperty Name="A_Role" Relationship="Self.FK_A_User_A_User" FromRole="A_User" ToRole="A_Role" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_Sen_Mean_A_User" FromRole="A_User" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_Sen_Mean1" Relationship="Self.FK_A_Sen_Mean_A_User1" FromRole="A_User" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_Sentence" Relationship="Self.FK_A_Sentence_A_Sentence" FromRole="A_User" ToRole="A_Sentence" />
+          <NavigationProperty Name="A_Sentence1" Relationship="Self.FK_A_Sentence_A_User" FromRole="A_User" ToRole="A_Sentence" />
+          <NavigationProperty Name="A_Sentence2" Relationship="Self.FK_A_Sentence_A_UserAppr" FromRole="A_User" ToRole="A_Sentence" />
+          <NavigationProperty Name="A_Topic" Relationship="Self.FK_A_Topic_A_User" FromRole="A_User" ToRole="A_Topic" />
+          <NavigationProperty Name="A_TopicSentence" Relationship="Self.FK_A_TopicSentence_A_User" FromRole="A_User" ToRole="A_TopicSentence" />
+          <NavigationProperty Name="A_TopicVoc" Relationship="Self.FK_A_TopicVoc_A_User" FromRole="A_User" ToRole="A_TopicVoc" />
+          <NavigationProperty Name="A_TopicVocDetail" Relationship="Self.FK_A_TopicVocDetail_A_User" FromRole="A_User" ToRole="A_TopicVocDetail" />
+          <NavigationProperty Name="A_Voc_Mean" Relationship="Self.FK_A_Voc_Mean_A_User" FromRole="A_User" ToRole="A_Voc_Mean" />
+          <NavigationProperty Name="A_Voc_Mean1" Relationship="Self.FK_A_Voc_Mean_A_User1" FromRole="A_User" ToRole="A_Voc_Mean" />
+          <NavigationProperty Name="A_Voc_Sen" Relationship="Self.FK_A_Voc_Sen_A_User" FromRole="A_User" ToRole="A_Voc_Sen" />
+          <NavigationProperty Name="A_Vocabulary" Relationship="Self.FK_A_Vocabulary_A_User" FromRole="A_User" ToRole="A_Vocabulary" />
+        </EntityType>
+        <EntityType Name="A_Voc_Mean">
+          <Key>
+            <PropertyRef Name="VocMeanId" />
+          </Key>
+          <Property Name="VocMeanId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VocId" Type="Int64" />
+          <Property Name="MeanId" Type="Int64" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="ApproveUserId" Type="Int32" />
+          <Property Name="ApproveFlag" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Mean" Relationship="Self.FK_A_Voc_Mean_A_Mean" FromRole="A_Voc_Mean" ToRole="A_Mean" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Voc_Mean_A_User" FromRole="A_Voc_Mean" ToRole="A_User" />
+          <NavigationProperty Name="A_User1" Relationship="Self.FK_A_Voc_Mean_A_User1" FromRole="A_Voc_Mean" ToRole="A_User" />
+          <NavigationProperty Name="A_Vocabulary" Relationship="Self.FK_A_Voc_Mean_A_Vocabulary" FromRole="A_Voc_Mean" ToRole="A_Vocabulary" />
+          <NavigationProperty Name="A_Voc_Sen" Relationship="Self.FK_A_Voc_Sen_A_Voc_Sen" FromRole="A_Voc_Mean" ToRole="A_Voc_Sen" />
+        </EntityType>
+        <EntityType Name="A_Voc_Sen">
+          <Key>
+            <PropertyRef Name="VocMeanId" />
+            <PropertyRef Name="SenMeanId" />
+          </Key>
+          <Property Name="VocMeanId" Type="Int64" Nullable="false" />
+          <Property Name="SenMeanId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="A_Sen_Mean" Relationship="Self.FK_A_Voc_Sen_A_Voc_Mean" FromRole="A_Voc_Sen" ToRole="A_Sen_Mean" />
+          <NavigationProperty Name="A_TopicVocDetail" Relationship="Self.FK_A_TopicVocDetail_A_Voc_Sen" FromRole="A_Voc_Sen" ToRole="A_TopicVocDetail" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Voc_Sen_A_User" FromRole="A_Voc_Sen" ToRole="A_User" />
+          <NavigationProperty Name="A_Voc_Mean" Relationship="Self.FK_A_Voc_Sen_A_Voc_Sen" FromRole="A_Voc_Sen" ToRole="A_Voc_Mean" />
+        </EntityType>
+        <EntityType Name="A_Vocabulary">
+          <Key>
+            <PropertyRef Name="VocId" />
+          </Key>
+          <Property Name="VocId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VocContent" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="VocContentFormat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VocKanji" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="VocHiragana" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="VocRomaji" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="VocKind" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApproveUserId" Type="Int32" />
+          <Property Name="ApproveFlag" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="A_User" Relationship="Self.FK_A_Vocabulary_A_User" FromRole="A_Vocabulary" ToRole="A_User" />
+          <NavigationProperty Name="A_Voc_Mean" Relationship="Self.FK_A_Voc_Mean_A_Vocabulary" FromRole="A_Vocabulary" ToRole="A_Voc_Mean" />
+        </EntityType>
+        <EntityType Name="B_News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TitleWithRuby" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewContentWithRuby" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MoviePath" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NewIdNHK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewsDate" Type="DateTime" Precision="3" />
+          <Property Name="NewsWebUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Grammar">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LevelID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_Level" Relationship="Self.FK_M_Grammar_M_Level" FromRole="M_Grammar" ToRole="M_Level" />
+        </EntityType>
+        <EntityType Name="M_GrammarJP">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="Int32" Nullable="false" />
+          <Property Name="SubID" Type="Int32" Nullable="false" />
+          <Property Name="LevelID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mean" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Full" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_1" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_5" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GrammarN1">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GrammarN2">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GrammarN3">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GrammarN4">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GrammarN5">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_GroupByBook">
+          <Key>
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LevelID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Yobi_1" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_5" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="M_Level" Relationship="Self.FK_M_GroupByBook_M_Level" FromRole="M_GroupByBook" ToRole="M_Level" />
+        </EntityType>
+        <EntityType Name="M_Level">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="M_Grammar" Relationship="Self.FK_M_Grammar_M_Level" FromRole="M_Level" ToRole="M_Grammar" />
+          <NavigationProperty Name="M_GroupByBook" Relationship="Self.FK_M_GroupByBook_M_Level" FromRole="M_Level" ToRole="M_GroupByBook" />
+        </EntityType>
+        <EntityType Name="M_Setting">
+          <Key>
+            <PropertyRef Name="SettingKey" />
+          </Key>
+          <Property Name="SettingKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="M_Compare">
+          <Key>
+            <PropertyRef Name="GrammarID" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="GrammarName" />
+          </Key>
+          <Property Name="GrammarID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GrammarName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Struct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MeanVN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MeanEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullVN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FullJP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SearchKey" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Yobi_2" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_3" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Yobi_4" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_A_Alphabet_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Alphabet" Type="Self.A_Alphabet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Alphabet">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Comp_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Comp" Type="Self.A_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Comp">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Country_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Country" Type="Self.A_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Country">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Topic_A_Country">
+          <End Role="A_Country" Type="Self.A_Country" Multiplicity="1" />
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="A_Topic">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Kanji_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Kanji" Type="Self.A_Kanji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Kanji">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_KanjiExam_A_Kanji1">
+          <End Role="A_Kanji" Type="Self.A_Kanji" Multiplicity="0..1" />
+          <End Role="A_KanjiExam" Type="Self.A_KanjiExam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Kanji">
+              <PropertyRef Name="KanjiId" />
+            </Principal>
+            <Dependent Role="A_KanjiExam">
+              <PropertyRef Name="KanjiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_KanjiExam_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_KanjiExam" Type="Self.A_KanjiExam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_KanjiExam">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_User_A_Level">
+          <End Role="A_Level" Type="Self.A_Level" Multiplicity="0..1" />
+          <End Role="A_User" Type="Self.A_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Level">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="A_User">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Like_A_Sen_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_Like" Type="Self.A_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_Like">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Like_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Like" Type="Self.A_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_Mean">
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Mean">
+              <PropertyRef Name="MeanId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="MeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_Mean">
+          <End Role="A_Mean" Type="Self.A_Mean" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Mean">
+              <PropertyRef Name="MeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="MeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_User_A_User">
+          <End Role="A_Role" Type="Self.A_Role" Multiplicity="1" />
+          <End Role="A_User" Type="Self.A_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="A_User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_Sen_Mean">
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sentence">
+              <PropertyRef Name="SentenceId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="SentenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sen_Mean_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sen_Mean">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_Sen_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_Voc_Mean">
+          <End Role="A_Sen_Mean" Type="Self.A_Sen_Mean" Multiplicity="1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Sen_Mean">
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sentence_A_Sentence">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sentence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sentence_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sentence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Sentence_A_UserAppr">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Sentence" Type="Self.A_Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Sentence">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Topic_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Topic">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_Topic">
+          <End Role="A_Topic" Type="Self.A_Topic" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Topic">
+              <PropertyRef Name="TopicId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicSentence_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="1" />
+          <End Role="A_TopicSentence" Type="Self.A_TopicSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicSentence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVoc_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_TopicVoc" Type="Self.A_TopicVoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicVoc">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_TopicVoc">
+          <End Role="A_TopicVoc" Type="Self.A_TopicVoc" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_TopicVoc">
+              <PropertyRef Name="TopicVocId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="TopicVocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_TopicVocDetail_A_Voc_Sen">
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="0..1" />
+          <End Role="A_TopicVocDetail" Type="Self.A_TopicVocDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Voc_Sen">
+              <PropertyRef Name="VocMeanId" />
+              <PropertyRef Name="SenMeanId" />
+            </Principal>
+            <Dependent Role="A_TopicVocDetail">
+              <PropertyRef Name="VocMeanId" />
+              <PropertyRef Name="SenMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="ApproveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Vocabulary_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_Vocabulary" Type="Self.A_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="A_Vocabulary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Mean_A_Vocabulary">
+          <End Role="A_Vocabulary" Type="Self.A_Vocabulary" Multiplicity="0..1" />
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Vocabulary">
+              <PropertyRef Name="VocId" />
+            </Principal>
+            <Dependent Role="A_Voc_Mean">
+              <PropertyRef Name="VocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_Voc_Sen_A_Voc_Sen">
+          <End Role="A_Voc_Mean" Type="Self.A_Voc_Mean" Multiplicity="1" />
+          <End Role="A_Voc_Sen" Type="Self.A_Voc_Sen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Voc_Mean">
+              <PropertyRef Name="VocMeanId" />
+            </Principal>
+            <Dependent Role="A_Voc_Sen">
+              <PropertyRef Name="VocMeanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_Grammar_M_Level">
+          <End Role="M_Level" Type="Self.M_Level" Multiplicity="1" />
+          <End Role="M_Grammar" Type="Self.M_Grammar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="M_Grammar">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_GroupByBook_M_Level">
+          <End Role="M_Level" Type="Self.M_Level" Multiplicity="1" />
+          <End Role="M_GroupByBook" Type="Self.M_GroupByBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="M_GroupByBook">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="A_Alphabet" EntityType="Self.A_Alphabet" />
+          <EntitySet Name="A_Comp" EntityType="Self.A_Comp" />
+          <EntitySet Name="A_Country" EntityType="Self.A_Country" />
+          <EntitySet Name="A_Kanji" EntityType="Self.A_Kanji" />
+          <EntitySet Name="A_KanjiExam" EntityType="Self.A_KanjiExam" />
+          <EntitySet Name="A_Level" EntityType="Self.A_Level" />
+          <EntitySet Name="A_Like" EntityType="Self.A_Like" />
+          <EntitySet Name="A_Mean" EntityType="Self.A_Mean" />
+          <EntitySet Name="A_Role" EntityType="Self.A_Role" />
+          <EntitySet Name="A_Sen_Mean" EntityType="Self.A_Sen_Mean" />
+          <EntitySet Name="A_Sentence" EntityType="Self.A_Sentence" />
+          <EntitySet Name="A_Topic" EntityType="Self.A_Topic" />
+          <EntitySet Name="A_TopicSentence" EntityType="Self.A_TopicSentence" />
+          <EntitySet Name="A_TopicVoc" EntityType="Self.A_TopicVoc" />
+          <EntitySet Name="A_TopicVocDetail" EntityType="Self.A_TopicVocDetail" />
+          <EntitySet Name="A_User" EntityType="Self.A_User" />
+          <EntitySet Name="A_Voc_Mean" EntityType="Self.A_Voc_Mean" />
+          <EntitySet Name="A_Voc_Sen" EntityType="Self.A_Voc_Sen" />
+          <EntitySet Name="A_Vocabulary" EntityType="Self.A_Vocabulary" />
+          <EntitySet Name="B_News" EntityType="Self.B_News" />
+          <EntitySet Name="M_Grammar" EntityType="Self.M_Grammar" />
+          <EntitySet Name="M_GrammarJP" EntityType="Self.M_GrammarJP" />
+          <EntitySet Name="M_GrammarN1" EntityType="Self.M_GrammarN1" />
+          <EntitySet Name="M_GrammarN2" EntityType="Self.M_GrammarN2" />
+          <EntitySet Name="M_GrammarN3" EntityType="Self.M_GrammarN3" />
+          <EntitySet Name="M_GrammarN4" EntityType="Self.M_GrammarN4" />
+          <EntitySet Name="M_GrammarN5" EntityType="Self.M_GrammarN5" />
+          <EntitySet Name="M_GroupByBook" EntityType="Self.M_GroupByBook" />
+          <EntitySet Name="M_Level" EntityType="Self.M_Level" />
+          <EntitySet Name="M_Setting" EntityType="Self.M_Setting" />
+          <EntitySet Name="M_Compare" EntityType="Self.M_Compare" />
+          <AssociationSet Name="FK_A_Alphabet_A_User" Association="Self.FK_A_Alphabet_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Alphabet" EntitySet="A_Alphabet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Comp_A_User" Association="Self.FK_A_Comp_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Comp" EntitySet="A_Comp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Country_A_User" Association="Self.FK_A_Country_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Country" EntitySet="A_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Topic_A_Country" Association="Self.FK_A_Topic_A_Country">
+            <End Role="A_Country" EntitySet="A_Country" />
+            <End Role="A_Topic" EntitySet="A_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Kanji_A_User" Association="Self.FK_A_Kanji_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Kanji" EntitySet="A_Kanji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_KanjiExam_A_Kanji1" Association="Self.FK_A_KanjiExam_A_Kanji1">
+            <End Role="A_Kanji" EntitySet="A_Kanji" />
+            <End Role="A_KanjiExam" EntitySet="A_KanjiExam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_KanjiExam_A_User1" Association="Self.FK_A_KanjiExam_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_KanjiExam" EntitySet="A_KanjiExam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_User_A_Level" Association="Self.FK_A_User_A_Level">
+            <End Role="A_Level" EntitySet="A_Level" />
+            <End Role="A_User" EntitySet="A_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Like_A_Sen_Mean" Association="Self.FK_A_Like_A_Sen_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_Like" EntitySet="A_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Like_A_User" Association="Self.FK_A_Like_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Like" EntitySet="A_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Mean_A_User" Association="Self.FK_A_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Mean" EntitySet="A_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_Mean" Association="Self.FK_A_Sen_Mean_A_Mean">
+            <End Role="A_Mean" EntitySet="A_Mean" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_Mean" Association="Self.FK_A_Voc_Mean_A_Mean">
+            <End Role="A_Mean" EntitySet="A_Mean" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_User_A_User" Association="Self.FK_A_User_A_User">
+            <End Role="A_Role" EntitySet="A_Role" />
+            <End Role="A_User" EntitySet="A_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_Sen_Mean" Association="Self.FK_A_Sen_Mean_A_Sen_Mean">
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_User" Association="Self.FK_A_Sen_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sen_Mean_A_User1" Association="Self.FK_A_Sen_Mean_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_Sen_Mean" Association="Self.FK_A_TopicSentence_A_Sen_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_Voc_Mean" Association="Self.FK_A_Voc_Sen_A_Voc_Mean">
+            <End Role="A_Sen_Mean" EntitySet="A_Sen_Mean" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sentence_A_Sentence" Association="Self.FK_A_Sentence_A_Sentence">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sentence_A_User" Association="Self.FK_A_Sentence_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Sentence_A_UserAppr" Association="Self.FK_A_Sentence_A_UserAppr">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Sentence" EntitySet="A_Sentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Topic_A_User" Association="Self.FK_A_Topic_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Topic" EntitySet="A_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_Topic" Association="Self.FK_A_TopicSentence_A_Topic">
+            <End Role="A_Topic" EntitySet="A_Topic" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicSentence_A_User" Association="Self.FK_A_TopicSentence_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicSentence" EntitySet="A_TopicSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVoc_A_User" Association="Self.FK_A_TopicVoc_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicVoc" EntitySet="A_TopicVoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_TopicVoc" Association="Self.FK_A_TopicVocDetail_A_TopicVoc">
+            <End Role="A_TopicVoc" EntitySet="A_TopicVoc" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_User" Association="Self.FK_A_TopicVocDetail_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_TopicVocDetail_A_Voc_Sen" Association="Self.FK_A_TopicVocDetail_A_Voc_Sen">
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+            <End Role="A_TopicVocDetail" EntitySet="A_TopicVocDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_User" Association="Self.FK_A_Voc_Mean_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_User1" Association="Self.FK_A_Voc_Mean_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_User" Association="Self.FK_A_Voc_Sen_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Vocabulary_A_User" Association="Self.FK_A_Vocabulary_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_Vocabulary" EntitySet="A_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Mean_A_Vocabulary" Association="Self.FK_A_Voc_Mean_A_Vocabulary">
+            <End Role="A_Vocabulary" EntitySet="A_Vocabulary" />
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_Voc_Sen_A_Voc_Sen" Association="Self.FK_A_Voc_Sen_A_Voc_Sen">
+            <End Role="A_Voc_Mean" EntitySet="A_Voc_Mean" />
+            <End Role="A_Voc_Sen" EntitySet="A_Voc_Sen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_Grammar_M_Level" Association="Self.FK_M_Grammar_M_Level">
+            <End Role="M_Level" EntitySet="M_Level" />
+            <End Role="M_Grammar" EntitySet="M_Grammar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_GroupByBook_M_Level" Association="Self.FK_M_GroupByBook_M_Level">
+            <End Role="M_Level" EntitySet="M_Level" />
+            <End Role="M_GroupByBook" EntitySet="M_GroupByBook" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JLPTDatabaseDataModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="A_Alphabet">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Alphabet">
+              <MappingFragment StoreEntitySet="A_Alphabet">
+                <ScalarProperty Name="AlphabetId" ColumnName="AlphabetId" />
+                <ScalarProperty Name="Romaji" ColumnName="Romaji" />
+                <ScalarProperty Name="Hiragana" ColumnName="Hiragana" />
+                <ScalarProperty Name="HiraganaImg" ColumnName="HiraganaImg" />
+                <ScalarProperty Name="Katakana" ColumnName="Katakana" />
+                <ScalarProperty Name="KatakanaImg" ColumnName="KatakanaImg" />
+                <ScalarProperty Name="GroupSort" ColumnName="GroupSort" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Comp">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Comp">
+              <MappingFragment StoreEntitySet="A_Comp">
+                <ScalarProperty Name="CompId" ColumnName="CompId" />
+                <ScalarProperty Name="CompContent" ColumnName="CompContent" />
+                <ScalarProperty Name="CompMean" ColumnName="CompMean" />
+                <ScalarProperty Name="CompMeanDetail" ColumnName="CompMeanDetail" />
+                <ScalarProperty Name="CompKun" ColumnName="CompKun" />
+                <ScalarProperty Name="CompOn" ColumnName="CompOn" />
+                <ScalarProperty Name="CompImageUrl" ColumnName="CompImageUrl" />
+                <ScalarProperty Name="CompStrokes" ColumnName="CompStrokes" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Country">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Country">
+              <MappingFragment StoreEntitySet="A_Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountrySign" ColumnName="CountrySign" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Kanji">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Kanji">
+              <MappingFragment StoreEntitySet="A_Kanji">
+                <ScalarProperty Name="KanjiId" ColumnName="KanjiId" />
+                <ScalarProperty Name="KanjiContent" ColumnName="KanjiContent" />
+                <ScalarProperty Name="KanjiMean" ColumnName="KanjiMean" />
+                <ScalarProperty Name="KanjiMeanDetail" ColumnName="KanjiMeanDetail" />
+                <ScalarProperty Name="KanjiOn" ColumnName="KanjiOn" />
+                <ScalarProperty Name="KanjiKun" ColumnName="KanjiKun" />
+                <ScalarProperty Name="KanjiImgUrl" ColumnName="KanjiImgUrl" />
+                <ScalarProperty Name="KanjiStrokes" ColumnName="KanjiStrokes" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_KanjiExam">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_KanjiExam">
+              <MappingFragment StoreEntitySet="A_KanjiExam">
+                <ScalarProperty Name="KanjiExId" ColumnName="KanjiExId" />
+                <ScalarProperty Name="KanjiId" ColumnName="KanjiId" />
+                <ScalarProperty Name="KanjiMean" ColumnName="KanjiMean" />
+                <ScalarProperty Name="KanjiMeanDetail" ColumnName="KanjiMeanDetail" />
+                <ScalarProperty Name="Higarana" ColumnName="Higarana" />
+                <ScalarProperty Name="KanjiContent" ColumnName="KanjiContent" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Level">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Level">
+              <MappingFragment StoreEntitySet="A_Level">
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Like">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Like">
+              <MappingFragment StoreEntitySet="A_Like">
+                <ScalarProperty Name="LikeId" ColumnName="LikeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SenMeanId" ColumnName="SenMeanId" />
+                <ScalarProperty Name="LikeFlag" ColumnName="LikeFlag" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Mean">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Mean">
+              <MappingFragment StoreEntitySet="A_Mean">
+                <ScalarProperty Name="MeanId" ColumnName="MeanId" />
+                <ScalarProperty Name="MeanContent" ColumnName="MeanContent" />
+                <ScalarProperty Name="ContentSearch" ColumnName="ContentSearch" />
+                <ScalarProperty Name="ContentFormat" ColumnName="ContentFormat" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Role">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Role">
+              <MappingFragment StoreEntitySet="A_Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Sen_Mean">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Sen_Mean">
+              <MappingFragment StoreEntitySet="A_Sen_Mean">
+                <ScalarProperty Name="SenMeanId" ColumnName="SenMeanId" />
+                <ScalarProperty Name="SentenceId" ColumnName="SentenceId" />
+                <ScalarProperty Name="MeanId" ColumnName="MeanId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ApproveUserId" ColumnName="ApproveUserId" />
+                <ScalarProperty Name="ApproveFlag" ColumnName="ApproveFlag" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Sentence">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Sentence">
+              <MappingFragment StoreEntitySet="A_Sentence">
+                <ScalarProperty Name="SentenceId" ColumnName="SentenceId" />
+                <ScalarProperty Name="Sentence" ColumnName="Sentence" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApproveUserId" ColumnName="ApproveUserId" />
+                <ScalarProperty Name="ApproveFlag" ColumnName="ApproveFlag" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+                <ScalarProperty Name="SenSearch" ColumnName="SenSearch" />
+                <ScalarProperty Name="SenFormat" ColumnName="SenFormat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Topic">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Topic">
+              <MappingFragment StoreEntitySet="A_Topic">
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_TopicSentence">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_TopicSentence">
+              <MappingFragment StoreEntitySet="A_TopicSentence">
+                <ScalarProperty Name="TopicSentenceId" ColumnName="TopicSentenceId" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="SenMeanId" ColumnName="SenMeanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_TopicVoc">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_TopicVoc">
+              <MappingFragment StoreEntitySet="A_TopicVoc">
+                <ScalarProperty Name="TopicVocId" ColumnName="TopicVocId" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_TopicVocDetail">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_TopicVocDetail">
+              <MappingFragment StoreEntitySet="A_TopicVocDetail">
+                <ScalarProperty Name="TopicVocDetailId" ColumnName="TopicVocDetailId" />
+                <ScalarProperty Name="TopicVocId" ColumnName="TopicVocId" />
+                <ScalarProperty Name="VocMeanId" ColumnName="VocMeanId" />
+                <ScalarProperty Name="SenMeanId" ColumnName="SenMeanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_User">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_User">
+              <MappingFragment StoreEntitySet="A_User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="AboutMe" ColumnName="AboutMe" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Voc_Mean">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Voc_Mean">
+              <MappingFragment StoreEntitySet="A_Voc_Mean">
+                <ScalarProperty Name="VocMeanId" ColumnName="VocMeanId" />
+                <ScalarProperty Name="VocId" ColumnName="VocId" />
+                <ScalarProperty Name="MeanId" ColumnName="MeanId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ApproveUserId" ColumnName="ApproveUserId" />
+                <ScalarProperty Name="ApproveFlag" ColumnName="ApproveFlag" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Voc_Sen">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Voc_Sen">
+              <MappingFragment StoreEntitySet="A_Voc_Sen">
+                <ScalarProperty Name="VocMeanId" ColumnName="VocMeanId" />
+                <ScalarProperty Name="SenMeanId" ColumnName="SenMeanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Vocabulary">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Vocabulary">
+              <MappingFragment StoreEntitySet="A_Vocabulary">
+                <ScalarProperty Name="VocId" ColumnName="VocId" />
+                <ScalarProperty Name="VocContent" ColumnName="VocContent" />
+                <ScalarProperty Name="VocContentFormat" ColumnName="VocContentFormat" />
+                <ScalarProperty Name="VocKanji" ColumnName="VocKanji" />
+                <ScalarProperty Name="VocHiragana" ColumnName="VocHiragana" />
+                <ScalarProperty Name="VocRomaji" ColumnName="VocRomaji" />
+                <ScalarProperty Name="VocKind" ColumnName="VocKind" />
+                <ScalarProperty Name="ApproveUserId" ColumnName="ApproveUserId" />
+                <ScalarProperty Name="ApproveFlag" ColumnName="ApproveFlag" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_News">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.B_News">
+              <MappingFragment StoreEntitySet="B_News">
+                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NewContent" ColumnName="NewContent" />
+                <ScalarProperty Name="TitleWithRuby" ColumnName="TitleWithRuby" />
+                <ScalarProperty Name="NewContentWithRuby" ColumnName="NewContentWithRuby" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="MoviePath" ColumnName="MoviePath" />
+                <ScalarProperty Name="NewIdNHK" ColumnName="NewIdNHK" />
+                <ScalarProperty Name="NewsDate" ColumnName="NewsDate" />
+                <ScalarProperty Name="NewsWebUrl" ColumnName="NewsWebUrl" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Grammar">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_Grammar">
+              <MappingFragment StoreEntitySet="M_Grammar">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarJP">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarJP">
+              <MappingFragment StoreEntitySet="M_GrammarJP">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="SubID" ColumnName="SubID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="Mean" ColumnName="Mean" />
+                <ScalarProperty Name="Full" ColumnName="Full" />
+                <ScalarProperty Name="Yobi_1" ColumnName="Yobi_1" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="Yobi_5" ColumnName="Yobi_5" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarN1">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarN1">
+              <MappingFragment StoreEntitySet="M_GrammarN1">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarN2">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarN2">
+              <MappingFragment StoreEntitySet="M_GrammarN2">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarN3">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarN3">
+              <MappingFragment StoreEntitySet="M_GrammarN3">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarN4">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarN4">
+              <MappingFragment StoreEntitySet="M_GrammarN4">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GrammarN5">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GrammarN5">
+              <MappingFragment StoreEntitySet="M_GrammarN5">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_GroupByBook">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_GroupByBook">
+              <MappingFragment StoreEntitySet="M_GroupByBook">
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Yobi_1" ColumnName="Yobi_1" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="Yobi_5" ColumnName="Yobi_5" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Level">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_Level">
+              <MappingFragment StoreEntitySet="M_Level">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Setting">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_Setting">
+              <MappingFragment StoreEntitySet="M_Setting">
+                <ScalarProperty Name="SettingKey" ColumnName="SettingKey" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Compare">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.M_Compare">
+              <MappingFragment StoreEntitySet="M_Compare">
+                <ScalarProperty Name="GrammarID" ColumnName="GrammarID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="GrammarName" ColumnName="GrammarName" />
+                <ScalarProperty Name="Struct" ColumnName="Struct" />
+                <ScalarProperty Name="MeanVN" ColumnName="MeanVN" />
+                <ScalarProperty Name="MeanEN" ColumnName="MeanEN" />
+                <ScalarProperty Name="FullVN" ColumnName="FullVN" />
+                <ScalarProperty Name="FullEN" ColumnName="FullEN" />
+                <ScalarProperty Name="FullJP" ColumnName="FullJP" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SearchKey" ColumnName="SearchKey" />
+                <ScalarProperty Name="Yobi_2" ColumnName="Yobi_2" />
+                <ScalarProperty Name="Yobi_3" ColumnName="Yobi_3" />
+                <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

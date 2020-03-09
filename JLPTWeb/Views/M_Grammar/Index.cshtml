@@ -1,0 +1,47 @@
+﻿@model IEnumerable<JLPTWeb.Models.M_Grammar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.FirstOrDefault() == null)
+{
+    <p>Xin vui lòng đợi cập nhật...</p>
+}
+else
+{
+    <h2>Ngữ pháp @Model.FirstOrDefault().M_Level.Description</h2>
+}
+
+<div class="list-group">
+    @{int i = 1; }
+    @foreach (var item in Model)
+    {
+        <button type="button" class="list-group-item nihon-text" data-toggle="modal" data-target="#@item.GrammarID"><span class="label label-default">@i</span> @item.GrammarName</button>
+        i = i + 1;
+    }
+</div>
+<!-- Modal -->
+@foreach (var item in Model)
+{
+<div class="modal fade" id="@item.GrammarID" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title nihon-text" style="color:orange">@item.GrammarName</h4>
+            </div>
+            <div class="modal-body mean-text">
+                    <div>
+                        @MvcHtmlString.Create(item.FullVN.Replace("@CT@", "<h4 style='color: red'>接続</h4>")
+           .Replace("@YN@", "<h4 style='color: red'>意味</h4>").Replace("@VD@", "<h4 style='color: red'>例文</h4>"))
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+    </div>
+</div>
+}

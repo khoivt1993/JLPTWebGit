@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Color Defult -->
+    <link rel="stylesheet" type="text/css" href="~/Content/red.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Content/countdown.css" media="screen" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="/Content/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = window.location;
+            $('ul.nav a[href="' + url + '"]').addClass('active');
+            $('ul.nav a').filter(function () {
+                return this.href == url.toString().slice(0, url.toString().indexOf("?"));
+            }).addClass('active');
+            $('ul.nav a').filter(function () {
+                return this.href == url;
+            }).addClass('active');
+            $('ul.nav a').filter(function () {
+                return this.href == url + 'Index';
+            }).addClass('active');
+            $('.active').closest('li.dropdown').children().addClass('dropdown-toggle active');
+
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="50" style="box-shadow:0 1px 4px 0px #e1e1e1;background: #fff">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="padding-top:20px;padding-bottom:20px">WebSiteName</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="\A_Voc_Mean\Index" style="padding-top:20px;padding-bottom:20px">Tra từ</a></li>
+                    <li><a href="\A_Sen_Mean\Index" style="padding-top:20px;padding-bottom:20px">Tra câu</a></li>
+                    <li><a href="\A_Sen_Mean\Create" style="padding-top:20px;padding-bottom:20px">Luyện dịch</a></li>
+                    <li><a href="\A_TopicSentence\Study" style="padding-top:20px;padding-bottom:20px">Mẫu câu</a></li>
+                    <li><a href="\A_TopicVocDetail\Study" style="padding-top:20px;padding-bottom:20px">Từ vựng</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-top:20px;padding-bottom:20px">Ngữ pháp<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="\M_Grammar\Index?levelId=50">Ngữ pháp N5</a></li>
+                            <li><a href="\M_Grammar\Index?levelId=40">Ngữ pháp N4</a></li>
+                            <li><a href="\M_Grammar\Index?levelId=30">Ngữ pháp N3</a></li>
+                            <li><a href="\M_Grammar\Index?levelId=20">Ngữ pháp N2</a></li>
+                            <li><a href="\M_Grammar\Index?levelId=10">Ngữ pháp N1</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="\B_News\Index" style="padding-top:20px;padding-bottom:20px">Đọc báo</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["Email"] == null)
+                    {
+                        <li><a href="/A_User/Create" style="padding-top:20px;padding-bottom:20px"><span class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
+                        <li><a href="/A_User/Login" style="padding-top:20px;padding-bottom:20px"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="\A_User\UserProfile"><i class="fa fa-user"></i>@Session["Email"]!</a>
+                        </li>
+                        <li><a href="@Url.Action("Logout","A_User")"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center" style="margin-top:80px;">
+        <div class="row content">
+            <div class="col-md-9 col-sm-12 col-xs-12 screen-search text-left" style="background-color:white">
+                @RenderBody()
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="box-menu-right" style="background-color: white">
+                    <div class="wrap">
+                        <h1><strong>日本語能力試験日まで</strong></h1>
+
+                        <div class="countdown">
+                            <div class="bloc-time days">
+                                <span class="count-title">日</span>
+
+                                <div id="countDays" class="figure"></div>
+                            </div>
+
+                            <div class="bloc-time hour">
+                                <span class="count-title">時</span>
+
+                                <div id="countHours" class="figure"></div>
+                            </div>
+
+                            <div class="bloc-time min">
+                                <span class="count-title">分</span>
+
+                                <div id="countMins" class="figure"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-menu-right" style="background-color:white">
+                    <img src="~/Content/Images/Cap1.jpg" style="height:230px;width:100%" />
+                </div>
+                <div class="well">
+                    <p><a href="#">Interests</a></p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-primary">W3Schools</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Football</span>
+                        <span class="label label-warning">Gaming</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+                <div class="well">
+                    <p><a href="#">Interests</a></p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-primary">W3Schools</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Football</span>
+                        <span class="label label-warning">Gaming</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+                <div class="well">
+                    <p><a href="#">Interests</a></p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-primary">W3Schools</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Football</span>
+                        <span class="label label-warning">Gaming</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+                <div class="well">
+                    <p><a href="#">Interests</a></p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-primary">W3Schools</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Football</span>
+                        <span class="label label-warning">Gaming</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row box-footer">
+        <div class="scale scale-left col-md-4 col-sm-4 col-xs-12" style="text-align:left">
+            <h3>Ứng dụng luyện thi JLPT</h3>
+
+            <h4>Test JLPT:<a href="https://itunes.apple.com/app/apple-store/id933081417" target="_blank"><i class="fa fa-apple" style="font-size:36px; margin:10px;"></i></a>
+            <a href="https://play.google.com/store/apps/details?id=com.mazii.dictionary" target="_blank"><i class="fa fa-google-plus" aria-hidden="true" style="font-size:36px; margin:10px;"></i></a>
+            <a href="https://chrome.google.com/webstore/detail/translate-japanese-mazii/lkjffochdceoneajnigkbdddjdekhojj" target="_blank"><i class="fa fa-google" style="font-size:36px; margin:10px;"></i></a></h4>
+            <h4>
+                JLPT GRAMMAR:<a href="https://itunes.apple.com/app/apple-store/id933081417" target="_blank"><i class="fa fa-apple" style="font-size:36px; margin:10px;"></i></a>
+                <a href="https://play.google.com/store/apps/details?id=com.mazii.dictionary" target="_blank"><i class="fa fa-google-plus" aria-hidden="true" style="font-size:36px; margin:10px;"></i></a>
+                <a href="https://chrome.google.com/webstore/detail/translate-japanese-mazii/lkjffochdceoneajnigkbdddjdekhojj" target="_blank"><i class="fa fa-google" style="font-size:36px; margin:10px;"></i></a>
+            </h4>
+        </div>
+        <div class="scale scale-left col-md-4 col-sm-4 col-xs-12" style="text-align:left">
+            <h3>Thông tin liên kết</h3>
+            <h4 style="padding-left:20px"><a href="\A_Voc_Mean\Index" style="padding-top:20px;padding-bottom:20px">Tra từ</a></h4>
+            <h4 style="padding-left:20px"><a href="\A_Sen_Mean\Index" style="padding-top:20px;padding-bottom:20px">Tra câu</a></h4>
+            <h4 style="padding-left:20px"><a href="\A_TopicSentence\Study" style="padding-top:20px;padding-bottom:20px">Mẫu câu</a></h4>
+            <h4 style="padding-left:20px"><a href="\B_News\Index" style="padding-top:20px;padding-bottom:20px">Đọc báo</a></h4>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+    <script type="text/javascript">
+        getInfoCount();
+        countDown();
+        var myVar;
+
+        function countDown() {
+            myVar = setInterval(getInfoCount, 60000);
+        }
+
+        function getInfoCount() {
+            var countDownDate = new Date("Dec 7, 2020 12:00:00").getTime();
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("countDays").innerHTML = "<span>" + days + "</span>"
+            document.getElementById("countHours").innerHTML = "<span>" + hours + "</span>"
+            document.getElementById("countMins").innerHTML = "<span>" + minutes + "</span>"
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(myVar);
+            }
+        }
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,31 @@
+﻿@model JLPTWeb.Models.A_Voc_Mean
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.TextBox("ctrText", null, htmlAttributes: new { @class = "form-control nihon-text item-search", placeholder = "Text" })
+            @Html.TextBox("ctrStart", null, htmlAttributes: new { @class = "form-control nihon-text item-search", placeholder = "Start" })
+            @Html.TextBox("ctrEnd", null, htmlAttributes: new { @class = "form-control nihon-text item-search", placeholder = "End" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<JLPTWeb.Models.A_TopicSentence>
+
+@{
+    ViewBag.Title = "StudyDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.FirstOrDefault().A_Topic.TopicName</h2>
+
+<div class="col-md-12">
+    @*<div class="card">
+            <div class="content table-responsive table-full-width">
+                <table class="table">
+                    @foreach (var item in Model)
+                    {
+                        if (item.A_Translate.A_Sentence.CountryId == 0)
+                        {
+                            <tr>
+                                <td class="active">
+                                    <p>@Html.DisplayFor(modelItem => item.A_Translate.A_Sentence.Sentence)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Html.DisplayFor(modelItem => item.A_Translate.A_Sentence1.Sentence)</p>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="active">
+                                    <p>@Html.DisplayFor(modelItem => item.A_Translate.A_Sentence1.Sentence)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Html.DisplayFor(modelItem => item.A_Translate.A_Sentence.Sentence)</p>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>*@
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            if (item.A_Translate.A_Sentence.CountryId == 0)
+            {
+                <li class="list-group-item list-group-item-warning">
+                    @Html.DisplayFor(modelItem => item.A_Translate.A_Sentence.Sentence)
+                </li>
+                <li class="list-group-item">
+                    @Html.DisplayFor(modelItem => item.A_Translate.A_Sentence1.Sentence)
+                </li>
+            }
+            else
+            {
+                <li class="list-group-item list-group-item-warning">
+                    @Html.DisplayFor(modelItem => item.A_Translate.A_Sentence1.Sentence)
+                </li>
+                <li class="list-group-item">
+                    @Html.DisplayFor(modelItem => item.A_Translate.A_Sentence.Sentence)
+                </li>
+            }
+        }
+    </ul>
+
+</div>

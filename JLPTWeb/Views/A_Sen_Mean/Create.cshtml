@@ -1,0 +1,125 @@
+﻿@model JLPTWeb.Models.A_Sen_Mean
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="card">
+            <div class="container-fluid" style="padding-top:2px">
+                @if (Request.Cookies["Language"] == null || Request.Cookies["Language"].Value == "VN")
+                {
+                    <img src="~/Content/Images/vn.svg" width="50" height="38" style="border:1px solid black" />
+                    <button class="btn btn-primary" type="submit" name="Create:ChangeLanguage">
+                        <i class="glyphicon glyphicon-resize-horizontal"></i>
+                    </button>
+                    <img src="~/Content/Images/jp.svg" width="50" height="38" style="border:1px solid black" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/jp.svg" width="50" height="38" style="border:1px solid black" />
+                    <button class="btn btn-primary" type="submit" name="Create:ChangeLanguage">
+                        <i class="glyphicon glyphicon-resize-horizontal"></i>
+                    </button>
+                    <img src="~/Content/Images/vn.svg" width="50" height="38" style="border:1px solid black" />
+                }
+
+            </div>
+            <div class="header" align="center">
+                @if (Request.Cookies["Language"] == null || Request.Cookies["Language"].Value == "VN")
+                {
+                    <h4>@Html.DisplayFor(model => model.A_Mean.MeanContent)</h4>
+                }
+                else
+                {
+                    <h4>@Html.DisplayFor(model => model.A_Sentence.Sentence)</h4>
+                }
+            </div>
+            <div class="content">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.SenMeanId, new { id = "SenMeanId" })
+                @*@Html.HiddenFor(model => model.SentenceId, new { id = "SentenceId" })
+                    @Html.HiddenFor(model => model.MeanId, new { id = "MeanId" })*@
+                <div class="row">
+                    <div class="form-group">
+                        <h4>@Html.TextBox("ctrSentenceTrans", null, htmlAttributes: new { @class = "form-control", placeholder = "日本、Nhật Bản" })</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        @if (ViewBag.lstSenMean == null)
+                        {
+                            <button class="btn btn-default" type="submit" name="Create:Add">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                        }
+                        <button class="btn btn-default" type="submit" name="Create:Next">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                @if (ViewBag.lstSenMean != null)
+                {
+                    <input type="hidden" value="1" name="ListFlag" />
+                    List<KeyValuePair<long, int>> lstLike = ViewBag.LstLikeAmount;
+                    List<KeyValuePair<long, int>> lstDislike = ViewBag.LstDislikeAmount;
+                    <div class="row">
+                        <div class="header">
+                            <h4 class="title">Kết quả dịch tham khảo</h4>
+                        </div>
+                        <ul class="list-group">
+                            @foreach (var item in (IEnumerable<JLPTWeb.Models.A_Sen_Mean>)ViewBag.lstSenMean)
+                            {
+                                <li class="list-group-item">
+                                    <div style="width:50px;float:left">
+                                        @if (item.ApproveFlag == 1)
+                                        {
+                                            <span class="glyphicon glyphicon-ok" style="color:#2ECC71"></span>
+                                        }
+                                        <p></p>
+                                    </div>
+                                    <div style="width:700px;float:left">
+                                        @if (Request.Cookies["Language"] == null || Request.Cookies["Language"].Value == "VN")
+                                        {
+                                            <p>@Html.DisplayFor(modelItem => item.A_Sentence.Sentence)</p>
+                                        }
+                                        else
+                                        {
+                                            <p>@Html.DisplayFor(modelItem => item.A_Mean.MeanContent)</p>
+                                        }
+                                    </div>
+                                    <div style="width:100%;text-align:right">
+                                        @{
+                                            List<int> lstValLike = (from like in lstLike where like.Key == item.SenMeanId select like.Value).ToList();
+                                            List<int> lstValDislike = (from like in lstDislike where like.Key == item.SenMeanId select like.Value).ToList();
+                                        }
+                                        @if (Session["Email"] == null)
+                                        {
+                                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink(" ", "LikeCreatePage", "A_Sen_Mean", new { item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-up", id = "lnkLike" })
+                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                            @Html.ActionLink(" ", "DislikeCreatePage", "A_Sen_Mean", new { item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-down", id = "lnkDislike" })
+                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                        }
+                                    </div>
+                                </li>
+                                            }
+                        </ul>
+                    </div>
+                                            }
+            </div>
+        </div>
+    </div>
+                                            }

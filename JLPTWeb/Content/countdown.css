@@ -1,0 +1,68 @@
+﻿.wrap{
+    background-color: white;
+    border-style: solid;
+    border-color: #CD5C5C;
+    border-width:2px;
+}
+.wrap h1 {
+  background-color: #CD5C5C;
+  margin:0px;
+  margin-bottom: 10px;
+  text-align: center;
+  font: 300 1.5em "Lato";
+  text-transform: uppercase;
+}
+
+.wrap h1 strong {
+  font-weight: 400;
+  color: white;
+}
+.countdown {
+    text-align:center;
+}
+.countdown .bloc-time {
+    display:inline-block;
+    margin-left:20px;
+    margin-right:20px;
+}
+.countdown .bloc-time .count-title {
+  margin-bottom: 15px;
+  font: normal 1.4em "Lato";
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+
+.countdown .figure > span {
+  margin: auto;
+  font: normal 1.94em "Lato";
+  font-weight: 700;
+  color: #de4848;
+}
+
+.article-main__title {
+    font-family: "HiraKakuPro-W3","Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ",Meiryo,"游ゴシック",YuGothic,"ＭＳ Ｐゴシック","MS PGothic","ＭＳ ゴシック","MS Gothic",sans-serif;
+    display: block;
+    padding-top: 1em;
+    line-height: 1.75;
+    font-size: 23px;
+    font-weight: 600;
+    color: #808080;
+    letter-spacing: .025em;
+    font-style: normal;
+}
+.article-body {
+  line-height: 3;
+  color: #333;
+  font-family: "ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+  font-size: 18px;
+  letter-spacing: .025em;
+}
+.sidebar-section__title {
+  position: relative;
+  padding-bottom: .5em;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .025em;
+  border-bottom: solid 1px #CD5C5C;
+  color:#CD5C5C;
+}

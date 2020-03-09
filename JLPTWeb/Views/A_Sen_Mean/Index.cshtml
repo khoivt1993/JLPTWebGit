@@ -1,0 +1,208 @@
+﻿@model IEnumerable<JLPTWeb.Models.A_Sen_Mean>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-9">
+        <div class="input-group">
+            @Html.TextBox("ctrSearchSentence", null, htmlAttributes: new { @class = "form-control nihon-text item-search", placeholder = "Nhập câu: " })
+            <div class="input-group-btn">
+                <button class="btn btn-default item-search" type="submit" name="Index:Search">
+                    <i class="glyphicon glyphicon-search" style="color:#CD5C5C"></i>
+                </button>
+                <button class="btn btn-default item-search" type="submit" name="Index:Add">
+                    <i class="glyphicon glyphicon-plus" style="color:#CD5C5C"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
+    if (Model != null)
+    {
+        <div class="col-md-12">
+            <ul class="list-group">
+                @{
+                    long senOrMeanId = -1;
+                    List<KeyValuePair<long, int>> lstLike = ViewBag.LstLikeAmount;
+                    List<KeyValuePair<long, int>> lstDislike = ViewBag.LstDislikeAmount;
+                }
+                @foreach (var item in Model)
+                {
+                    if (ViewBag.Country == null || ViewBag.Country == 1)
+                    {
+                        if (item.A_Sentence.SentenceId == senOrMeanId)
+                        {
+                            <li class="list-group-item">
+                                <div class="like-container">
+                                    @{
+                                        List<int> lstValLike = (from like in lstLike where like.Key == item.SenMeanId select like.Value).ToList();
+                                        List<int> lstValDislike = (from like in lstDislike where like.Key == item.SenMeanId select like.Value).ToList();
+                                    }
+                                    @if (Session["Email"] == null)
+                                {
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                        <span class="badge">@lstValLike[0].ToString()</span>
+                                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                                        <span class="badge">@lstValDislike[0].ToString()</span>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink(" ", "Like", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-up", id = "lnkLike" })
+                                        <span class="badge">@lstValLike[0].ToString()</span>
+                                        @Html.ActionLink(" ", "Dislike", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-down", id = "lnkDislike" })
+                                        <span class="badge">@lstValDislike[0].ToString()</span>
+                                    }
+                                </div>
+                                <div class="check-container">
+                                    @if (item.ApproveFlag == 1)
+                                {
+                                        <span class="glyphicon glyphicon-ok" style="color:#2ECC71"></span>
+                                    }
+                                    <p></p>
+                                </div>
+                                <div class="mean-text">@Html.DisplayFor(modelItem => item.A_Mean.MeanContent)</div>
+                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="list-group-item list-group-item-warning">
+                                                <div class="nihon-text">@Html.DisplayFor(modelItem => item.A_Sentence.Sentence)</div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="like-container">
+                                                    @{
+                                                        List<int> lstValLike = (from like in lstLike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                        List<int> lstValDislike = (from like in lstDislike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                    }
+                                                    @if (Session["Email"] == null)
+                                                    {
+                                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                        <span class="badge">@lstValLike[0].ToString()</span>
+                                                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                                                        <span class="badge">@lstValDislike[0].ToString()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.ActionLink(" ", "Like", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-up", id = "lnkLike" })
+                                                        <span class="badge">@lstValLike[0].ToString()</span>
+                                                        @Html.ActionLink(" ", "Dislike", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-down", id = "lnkDislike" })
+                                                        <span class="badge">@lstValDislike[0].ToString()</span>
+                                                    }
+                                                </div>
+                                                <div class="check-container">
+                                                    @if (item.ApproveFlag == 1)
+                                                    {
+                                                        <span class="glyphicon glyphicon-ok" style="color:#2ECC71"></span>
+                                                    }
+                                                </div>
+                                                <div class="mean-text">
+                                                    @Html.DisplayFor(modelItem => item.A_Mean.MeanContent)
+                                                </div>
+                                            </li>
+                                                            }
+                                                            senOrMeanId = item.A_Sentence.SentenceId;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.A_Mean.MeanId == senOrMeanId)
+                                                            {
+                                                                <li class="list-group-item">
+                                                                    <div class="like-container">
+                                                                        @{
+                                                                            List<int> lstValLike = (from like in lstLike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                                            List<int> lstValDislike = (from like in lstDislike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                                        }
+                                                                        @if (Session["Email"] == null)
+                                                                        {
+                                                                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                                                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                                                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @Html.ActionLink(" ", "Like", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-up", id = "lnkLike" })
+                                                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                                                            @Html.ActionLink(" ", "Dislike", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-down", id = "lnkDislike" })
+                                                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                                                        }
+                                                                    </div>
+                                                                    <div class="check-container">
+                                                                        @if (item.ApproveFlag == 1)
+                                                                        {
+                                                                            <span class="glyphicon glyphicon-ok" style="color:#2ECC71"></span>
+                                                                        }
+                                                                        <p></p>
+                                                                    </div>
+                                                                    <div class="nihon-text">@Html.DisplayFor(modelItem => item.A_Sentence.Sentence)</div>
+                                                                </li>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <li class="list-group-item list-group-item-warning" style="text-align:left">
+                                                                                    <div class="mean-text">@Html.DisplayFor(modelItem => item.A_Mean.MeanContent)</div>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <div class="like-container">
+                                                                                        @{
+                                                                                            List<int> lstValLike = (from like in lstLike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                                                            List<int> lstValDislike = (from like in lstDislike where like.Key == item.SenMeanId select like.Value).ToList();
+                                                                                        }
+                                                                                        @if (Session["Email"] == null)
+                                                                                        {
+                                                                                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                                                                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                                                                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            @Html.ActionLink(" ", "Like", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-up", id = "lnkLike" })
+                                                                                            <span class="badge">@lstValLike[0].ToString()</span>
+                                                                                            @Html.ActionLink(" ", "Dislike", "A_Sen_Mean", new { SenMeanId = item.SenMeanId }, new { @class = "glyphicon glyphicon-thumbs-down", id = "lnkDislike" })
+                                                                                            <span class="badge">@lstValDislike[0].ToString()</span>
+                                                                                        }
+                                                                                    </div>
+                                                                                    <div class="check-container">
+                                                                                        @if (item.ApproveFlag == 1)
+                                                                                        {
+                                                                                            <span class="glyphicon glyphicon-ok" style="color:#2ECC71"></span>
+                                                                                        }
+                                                                                        <p></p>
+                                                                                    </div>
+                                                                                    <div class="nihon-text">
+                                                                                        @Html.DisplayFor(modelItem => item.A_Sentence.Sentence)
+                                                                                    </div>
+                                                                                </li>
+                                                                                                    }
+                                                                                                    senOrMeanId = item.A_Mean.MeanId;
+                                                                                                }
+                                                                                            }
+            </ul>
+        </div>
+                                                                                                }
+                                                                                            }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#lnkLike,#lnkDislike').click(function () {
+            var firstname = $('#ctrSearchSentence').val(); // get the textbox value
+            var url = $(this).attr('href') + '&ctrSearchSentence=' + firstname; // build new url
+            location.href = url; // redirect
+            return false; // cancel default redirect
+        });
+    });
+    //function AddSentence() {
+    //    var firstname = $('#ctrSearchSentence').val();
+    //    $.post('\A_Sen_Mean\AddSentence', {
+    //        ctrSearchSentence: firstname
+    //    }, function (data) {
+    //        alert(data);
+    //    }, 'json');
+    //}
+</script>

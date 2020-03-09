@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JLPTWeb.Models.A_Topic>
+
+@{
+    ViewBag.Title = "Study";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mẫu câu</h2>
+
+<div class="list-group">
+    @{int i = 1; }
+    @foreach (var item in Model)
+    {
+        @*<a href="\A_TopicSentence\StudyDetail?Id=@item.TopicId" class="list-group-item"><span class="label label-default">@i</span> @item.TopicName</a>*@
+        <button type="button" class="list-group-item" data-toggle="modal" data-target="#@item.TopicId"><span class="label label-default">@i</span> @item.TopicName</button>
+        i = i + 1;
+    }
+</div>
+<!-- Modal -->
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="@item.TopicId" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title nihon-text" style="color:orange">@item.TopicName</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        @foreach (var itemTopicSen in item.A_TopicSentence)
+                        {
+                            <li class="list-group-item list-group-item-warning">
+                                <div class="nihon-text">@Html.DisplayFor(modelItem => itemTopicSen.A_Sen_Mean.A_Sentence.Sentence)</div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="mean-text">@Html.DisplayFor(modelItem => itemTopicSen.A_Sen_Mean.A_Mean.MeanContent)</div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

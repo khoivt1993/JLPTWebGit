@@ -1,0 +1,45 @@
+﻿@model PagedList.IPagedList<JLPTWeb.Models.B_News>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_NotRight.cshtml";
+}
+
+@{
+    var news = (JLPTWeb.Models.B_News)ViewBag.lstNews;
+}
+
+<div class="col-sm-8" style="padding-right:20px">
+    <div class="row">
+        <div class="article-main__title">@MvcHtmlString.Create(news.TitleWithRuby)</div><br />
+        <p style="color:#999">@news.NewsDate</p>
+        <img src="@news.ImagePath" class="img-rounded" alt="Cinque Terre" style="width:100%; margin-bottom:10px;">
+    </div>
+    <div class="row nihon-text">
+        @MvcHtmlString.Create(news.NewContentWithRuby)
+    </div>
+    <div class="row" style="text-align:right">
+        ソース：<a target="blank" href="https://www3.nhk.or.jp/news/">NHK ニュース</a>
+    </div>
+</div>
+
+<div class="col-sm-4" style="border-left: solid 1px #CD5C5C;">
+    <h1 class="sidebar-section__title" style="margin-top:0px"><ruby>新<rt>あたら</rt></ruby>しいニュース</h1>
+    @foreach (var item in Model)
+    {
+        <div class="row" style="position:relative">
+            <a href="/B_News/Index?Id=@item.NewsId&page=@Model.PageNumber">
+                <div class="col-md-6">
+                    <img src="@item.ImagePath" alt="Lights" style="width:100%">
+                </div>
+                <div class="nihon-text-title">
+                    <p style="color:#808080">@item.Title</p>
+                </div>
+                <div style="color:#999;position:absolute;bottom:0;right:15px">@item.NewsDate</div>
+            </a>
+        </div>
+        <hr style="width:100%;border-width:1px;border-color:#CD5C5C" />
+    }
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", "B_News", new { page, Id = @news.NewsId }), new PagedListRenderOptions { MaximumPageNumbersToDisplay = 4 })
+</div>

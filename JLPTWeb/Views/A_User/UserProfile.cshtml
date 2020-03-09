@@ -1,0 +1,225 @@
+﻿@model JLPTWeb.Models.A_User
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+}
+
+@*<h2>UserProfile</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>A_User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NickName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TelNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TelNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TelNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sex, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleId, "RoleId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActiveFlag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ActiveFlag, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ActiveFlag, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UpdateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UpdateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeleteTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeleteTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeleteTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}*@
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+<div class="col-md-8">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Edit Profile</h4>
+        </div>
+        <div class="content">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.UserId)
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                            @*<input type="email" class="form-control" disabled placeholder="Email" value="@Model.Email">*@
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>NickName</label>
+                            @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control" } })
+                            @*<input type="text" class="form-control" placeholder="NickName" value="michael23">*@
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            @Html.EditorFor(model => model.TelNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Tel" } })
+                            @*<input type="number" class="form-control" placeholder="Tel">*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @*<input type="text" class="form-control" placeholder="Company" value="Mike">*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Trình độ</label>
+                            @Html.DropDownList("LevelId", null, htmlAttributes: new { @class = "form-control", placeholder = "Trình độ" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            @{
+                                List<SelectListItem> sex_items = new List<SelectListItem>();
+                                sex_items.Add(new SelectListItem() { Text = "Nữ", Value = "Female" });
+                                sex_items.Add(new SelectListItem() { Text = "Nam", Value = "Male" });
+                            }
+                            @Html.DropDownListFor(model => model.Sex, sex_items, "Giới tính", htmlAttributes: new { @class = "form-control", placeholder = "Giới tính" })
+                            @*@Html.EditorFor(model => model.Sex, new { htmlAttributes = new { @class = "form-control", placeholder = "Giới tính" } })*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>About Me</label>
+                            @Html.TextAreaFor(model => model.AboutMe, new { @class = "form-control", rows = "5" })
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger btn-fill pull-right">Update Profile</button>
+                <div class="clearfix"></div>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-user">
+        <div class="image">
+            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..." />
+        </div>
+        <div class="content">
+            <div class="author">
+                <a href="#">
+                    <img class="avatar border-gray" src="~/Content/assets/img/faces/face-3.jpg" alt="..." />
+                    <h4 class="title">
+                        @Model.FullName<br />
+                        @if(Model.A_Level != null) {
+                            @Model.A_Level.Description<br />
+                        }
+                        <small>@Model.NickName</small>
+                    </h4>
+                </a>
+            </div>
+            <p class="description text-center">
+            @if (Model.AboutMe != null && Model.AboutMe != "")
+            {
+                @MvcHtmlString.Create('"' + @Model.AboutMe.Replace("\n", "<br/>") + '"')
+            }
+            </p>
+        </div>
+        <hr>
+        <div class="text-center">
+            <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+            <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+            <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+        </div>
+    </div>
+</div>
