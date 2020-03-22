@@ -16,10 +16,10 @@ namespace JLPTWeb.Controllers
         private JLPTDatabaseEntities db = new JLPTDatabaseEntities();
 
         // GET: A_TopicSentence
-        public ActionResult Study()
+        public ActionResult Study(int levelId)
         {
             ViewBag.NullSenMeanId = Settings.Default.NullSenMeanId;
-            var a_TopicVoc = db.A_TopicVoc.Where(m => m.ActiveFlag == 1);
+            var a_TopicVoc = db.A_TopicVoc.Where(m => m.LevelID == levelId);
             return View(a_TopicVoc.ToList());
         }
 

@@ -57,5 +57,6 @@ namespace JLPTWeb.Models
         public virtual DbSet<M_Level> M_Level { get; set; }
         public virtual DbSet<M_Setting> M_Setting { get; set; }
         public virtual DbSet<M_Compare> M_Compare { get; set; }
+        public virtual DbSet<A_VocHistory> A_VocHistory { get; set; }
     }
 }

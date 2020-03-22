@@ -50,30 +50,44 @@ namespace JLPTWeb.Controllers
 
             //get data tu DB truong hop khong ton tai get tu mazii
             //var a_Voc_Mean = db.A_Voc_Mean.Include(a => a.A_Mean).Include(a => a.A_User).Include(a => a.A_User1).Include(a => a.A_Vocabulary);
-            var a_Voc_Mean = db.A_Voc_Mean.Where(a => (a.A_Vocabulary.VocContent == ctrSearchVoc || a.A_Vocabulary.VocHiragana == ctrSearchVoc) &&
-                                                a.ApproveFlag == 1 && a.ActiveFlag == 1);
-            if (a_Voc_Mean.Any())
+            //var a_Voc_Mean = db.A_Voc_Mean.Where(a => a.A_Vocabulary.VocContent.Equals(ctrSearchVoc) || a.A_Vocabulary.VocHiragana.Equals(ctrSearchVoc));
+            List<A_Voc_Mean> lstVocMean = new List<A_Voc_Mean>();
+            lstVocMean = db.A_Voc_Mean.Where(a => a.A_Vocabulary.VocContent.Equals(ctrSearchVoc) || a.A_Vocabulary.VocHiragana.Equals(ctrSearchVoc)).ToList();
+            if (lstVocMean.Count > 0)
             {
-                return View(a_Voc_Mean.ToList());
+                return View(lstVocMean);
             }
-            Translate_Bus tranBus = new Translate_Bus();
-            tranBus.getDataFromApi(ctrSearchVoc);
+            // U_Start 20200322 Khoi-VT sua add vao table history
+            //Translate_Bus tranBus = new Translate_Bus();
+            //tranBus.getDataFromApi(ctrSearchVoc);
 
-            lstSenMean = new List<A_Sen_Mean>();
-            senMeanBus = new Sen_Mean_Bus();
-            lstSenMean = senMeanBus.getListSentence(ctrSearchVoc, 10);
-            ViewBag.LstSenMean = lstSenMean.ToList();
+            //lstSenMean = new List<A_Sen_Mean>();
+            //senMeanBus = new Sen_Mean_Bus();
+            //lstSenMean = senMeanBus.getListSentence(ctrSearchVoc, 10);
+            //ViewBag.LstSenMean = lstSenMean.ToList();
 
 
-            // get sentence of vocabulary
-            lstVocSen = new List<A_Voc_Sen>();
-            lstVocSen = db.A_Voc_Sen.Where(s => s.A_Sen_Mean.A_Sentence.SenSearch.Contains(ctrSearchVoc)).ToList();
-            ViewBag.lstVocSen = lstVocSen;
+            //// get sentence of vocabulary
+            //lstVocSen = new List<A_Voc_Sen>();
+            //lstVocSen = db.A_Voc_Sen.Where(s => s.A_Sen_Mean.A_Sentence.SenSearch.Contains(ctrSearchVoc)).ToList();
+            //ViewBag.lstVocSen = lstVocSen;
 
-            //a_Voc_Mean = db.A_Voc_Mean.Include(a => a.A_Mean).Include(a => a.A_User).Include(a => a.A_User1).Include(a => a.A_Vocabulary);
-            a_Voc_Mean = a_Voc_Mean.Where(a => (a.A_Vocabulary.VocContent == ctrSearchVoc || a.A_Vocabulary.VocHiragana == ctrSearchVoc) &&
-                                                a.ApproveFlag == 1 && a.ActiveFlag == 1);
-            return View(a_Voc_Mean.ToList());
+            ////a_Voc_Mean = db.A_Voc_Mean.Include(a => a.A_Mean).Include(a => a.A_User).Include(a => a.A_User1).Include(a => a.A_Vocabulary);
+            //a_Voc_Mean = a_Voc_Mean.Where(a => (a.A_Vocabulary.VocContent == ctrSearchVoc || a.A_Vocabulary.VocHiragana == ctrSearchVoc) &&
+            //                                    a.ApproveFlag == 1 && a.ActiveFlag == 1);
+            //return View(a_Voc_Mean.ToList());
+            if (!db.A_VocHistory.Any(s => s.VocHistoryContent == ctrSearchVoc))
+            {
+                A_VocHistory vocHis = new A_VocHistory();
+                vocHis.VocHistoryContent = ctrSearchVoc;
+                vocHis.ActiveFlag = 1;
+                vocHis.CreateTime = DateTime.Now;
+                vocHis.UpdateTime = DateTime.Now;
+                db.A_VocHistory.Add(vocHis);
+                db.SaveChanges();
+            }
+            return View();
+            // U_End 20200322 Khoi-VT sua add vao table history
         }
         // GET: A_Voc_Mean
         public ActionResult Index()

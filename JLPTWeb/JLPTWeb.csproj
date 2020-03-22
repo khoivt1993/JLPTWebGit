@@ -248,6 +248,7 @@
     <Compile Include="Models\A_Vocabulary.cs">
       <DependentUpon>JLPTWebModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\A_VocHistory.cs" />
     <Compile Include="Models\A_Voc_Mean.cs">
       <DependentUpon>JLPTWebModel.tt</DependentUpon>
     </Compile>

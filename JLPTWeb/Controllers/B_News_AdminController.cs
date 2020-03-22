@@ -48,7 +48,7 @@ namespace JLPTWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NewsId,Title,NewContent,ImagePath,MoviePath,NewIdNHK,NewsDate,NewsWebUrl,ActiveFlag,CreateTime,UpdateTime,DeleteTime,TitleWithRuby,NewContentWithRuby")] B_News b_News)
+        public ActionResult Create(string linkDown)
         {
 
             var newsDate = (from d in db.B_News select d.NewsDate).Max();
@@ -56,7 +56,7 @@ namespace JLPTWeb.Controllers
             {
                 using (var client = new WebClient())
                 {
-                    var responseString = client.DownloadString("https://www3.nhk.or.jp/news/easy/news-list.json?_=1569328766640");
+                    var responseString = client.DownloadString(linkDown);
                     var news = Helper.News.FromJson(responseString);
                     if (news.Count > 0)
                     {
@@ -64,24 +64,26 @@ namespace JLPTWeb.Controllers
                         {
                             foreach (var el in item.Value)
                             {
-                                if (el.NewsPrearrangedTime.DateTime > newsDate)
+                                //if (el.NewsPrearrangedTime.DateTime > newsDate)
+                                //{
+
+                                var responseString1 = client.DownloadString("https://www3.nhk.or.jp/news/easy/" + el.NewsId + "/" + el.NewsId + ".html");
+                                int startIndex = responseString1.IndexOf("<h1 class=\"article-main__title\"");
+                                int endIndex = responseString1.LastIndexOf("class=\"article-main__date\"") - 4;
+                                int length = endIndex - startIndex + 1;
+                                String title = responseString1.Substring(startIndex, length).Trim();
+                                title = title.Replace("  ", "");
+
+                                startIndex = responseString1.IndexOf("<div class=\"article-main__body article-body\"");
+                                endIndex = responseString1.LastIndexOf("<div class=\"article-main__colors\">") - 1;
+                                length = endIndex - startIndex + 1;
+                                String content = responseString1.Substring(startIndex, length).Trim();
+                                content = content.Replace("  ", "");
+                                try
                                 {
-
-                                    var responseString1 = client.DownloadString("https://www3.nhk.or.jp/news/easy/" + el.NewsId + "/" + el.NewsId + ".html");
-                                    int startIndex = responseString1.IndexOf("<h1 class=\"article-main__title\"");
-                                    int endIndex = responseString1.LastIndexOf("class=\"article-main__date\"") - 4;
-                                    int length = endIndex - startIndex + 1;
-                                    String title = responseString1.Substring(startIndex, length).Trim();
-                                    title = title.Replace("  ", "");
-
-                                    startIndex = responseString1.IndexOf("<div class=\"article-main__body article-body\"");
-                                    endIndex = responseString1.LastIndexOf("<div class=\"article-main__colors\">") - 1;
-                                    length = endIndex - startIndex + 1;
-                                    String content = responseString1.Substring(startIndex, length).Trim();
-                                    content = content.Replace("  ", "");
-                                    try
+                                    if (!db.B_News.Any(s => s.Title == el.Title))
                                     {
-                                        b_News = new B_News();
+                                        B_News b_News = new B_News();
                                         b_News.Title = el.Title;
                                         b_News.TitleWithRuby = el.TitleWithRuby;
                                         b_News.NewContent = content;
@@ -97,28 +99,28 @@ namespace JLPTWeb.Controllers
                                         db.B_News.Add(b_News);
                                         db.SaveChanges();
                                     }
-                                    catch (DbEntityValidationException ex)
+                                }
+                                catch (DbEntityValidationException ex)
+                                {
+                                    var sb = new StringBuilder();
+
+                                    foreach (var failure in ex.EntityValidationErrors)
                                     {
-                                        var sb = new StringBuilder();
-
-                                        foreach (var failure in ex.EntityValidationErrors)
+                                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                                        foreach (var error in failure.ValidationErrors)
                                         {
-                                            sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
-                                            foreach (var error in failure.ValidationErrors)
-                                            {
-                                                sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
-                                                sb.AppendLine();
-                                            }
+                                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                                            sb.AppendLine();
                                         }
-
-                                        throw new DbEntityValidationException(
-                                            "Entity Validation Failed - errors follow:\n" +
-                                            sb.ToString(), ex
-                                            );
                                     }
 
+                                    throw new DbEntityValidationException(
+                                        "Entity Validation Failed - errors follow:\n" +
+                                        sb.ToString(), ex
+                                        );
                                 }
                             }
+                            //}
 
                         }
                     }
@@ -126,7 +128,7 @@ namespace JLPTWeb.Controllers
                 return RedirectToAction("Create");
             }
 
-            return View(b_News);
+            return View();
         }
 
         // GET: B_News_Admin/Edit/5

@@ -9,6 +9,7 @@
     var news = (JLPTWeb.Models.B_News)ViewBag.lstNews;
 }
 
+@if (news != null) { 
 <div class="col-sm-8" style="padding-right:20px">
     <div class="row">
         <div class="article-main__title">@MvcHtmlString.Create(news.TitleWithRuby)</div><br />
@@ -22,7 +23,7 @@
         ソース：<a target="blank" href="https://www3.nhk.or.jp/news/">NHK ニュース</a>
     </div>
 </div>
-
+}
 <div class="col-sm-4" style="border-left: solid 1px #CD5C5C;">
     <h1 class="sidebar-section__title" style="margin-top:0px"><ruby>新<rt>あたら</rt></ruby>しいニュース</h1>
     @foreach (var item in Model)

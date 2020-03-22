@@ -179,6 +179,7 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="LevelID" Type="int" />
         </EntityType>
         <EntityType Name="A_TopicSentence">
           <Key>
@@ -204,6 +205,7 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="LevelID" Type="int" />
         </EntityType>
         <EntityType Name="A_TopicVocDetail">
           <Key>
@@ -287,6 +289,17 @@
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="DeleteTime" Type="datetime" />
           <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="A_VocHistory">
+          <Key>
+            <PropertyRef Name="VocHistoryId" />
+          </Key>
+          <Property Name="VocHistoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VocHistoryContent" Type="nvarchar(max)" />
+          <Property Name="ActiveFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
         </EntityType>
         <EntityType Name="B_News">
           <Key>
@@ -970,6 +983,7 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
           <EntitySet Name="A_Voc_Mean" EntityType="Self.A_Voc_Mean" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Voc_Sen" EntityType="Self.A_Voc_Sen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Vocabulary" EntityType="Self.A_Vocabulary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_VocHistory" EntityType="Self.A_VocHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="B_News" EntityType="Self.B_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Grammar" EntityType="Self.M_Grammar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_GrammarJP" EntityType="Self.M_GrammarJP" Schema="dbo" store:Type="Tables" />
@@ -1354,6 +1368,7 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
           <NavigationProperty Name="A_Country" Relationship="Self.FK_A_Topic_A_Country" FromRole="A_Topic" ToRole="A_Country" />
           <NavigationProperty Name="A_User" Relationship="Self.FK_A_Topic_A_User" FromRole="A_Topic" ToRole="A_User" />
           <NavigationProperty Name="A_TopicSentence" Relationship="Self.FK_A_TopicSentence_A_Topic" FromRole="A_Topic" ToRole="A_TopicSentence" />
+          <Property Name="LevelID" Type="Int32" />
         </EntityType>
         <EntityType Name="A_TopicSentence">
           <Key>
@@ -1384,6 +1399,7 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
           <Property Name="DeleteTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="A_User" Relationship="Self.FK_A_TopicVoc_A_User" FromRole="A_TopicVoc" ToRole="A_User" />
           <NavigationProperty Name="A_TopicVocDetail" Relationship="Self.FK_A_TopicVocDetail_A_TopicVoc" FromRole="A_TopicVoc" ToRole="A_TopicVocDetail" />
+          <Property Name="LevelID" Type="Int32" />
         </EntityType>
         <EntityType Name="A_TopicVocDetail">
           <Key>
@@ -2360,7 +2376,19 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
             <End Role="M_Level" EntitySet="M_Level" />
             <End Role="M_GroupByBook" EntitySet="M_GroupByBook" />
           </AssociationSet>
+          <EntitySet Name="A_VocHistory" EntityType="JLPTDatabaseDataModel.A_VocHistory" />
         </EntityContainer>
+        <EntityType Name="A_VocHistory">
+          <Key>
+            <PropertyRef Name="VocHistoryId" />
+          </Key>
+          <Property Name="VocHistoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VocHistoryContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2543,6 +2571,7 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
           <EntitySetMapping Name="A_Topic">
             <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_Topic">
               <MappingFragment StoreEntitySet="A_Topic">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
                 <ScalarProperty Name="TopicId" ColumnName="TopicId" />
                 <ScalarProperty Name="TopicName" ColumnName="TopicName" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -2571,6 +2600,7 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
           <EntitySetMapping Name="A_TopicVoc">
             <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_TopicVoc">
               <MappingFragment StoreEntitySet="A_TopicVoc">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
                 <ScalarProperty Name="TopicVocId" ColumnName="TopicVocId" />
                 <ScalarProperty Name="TopicName" ColumnName="TopicName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2900,6 +2930,18 @@ warning 6002: The table/view 'JLPTDatabaseData.dbo.M_Compare' does not have a pr
                 <ScalarProperty Name="Yobi_4" ColumnName="Yobi_4" />
                 <ScalarProperty Name="InsDate" ColumnName="InsDate" />
                 <ScalarProperty Name="UpdDate" ColumnName="UpdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_VocHistory">
+            <EntityTypeMapping TypeName="JLPTDatabaseDataModel.A_VocHistory">
+              <MappingFragment StoreEntitySet="A_VocHistory">
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="VocHistoryContent" ColumnName="VocHistoryContent" />
+                <ScalarProperty Name="VocHistoryId" ColumnName="VocHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

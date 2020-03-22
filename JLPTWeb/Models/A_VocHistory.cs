@@ -12,25 +12,13 @@ namespace JLPTWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class A_TopicVoc
+    public partial class A_VocHistory
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public A_TopicVoc()
-        {
-            this.A_TopicVocDetail = new HashSet<A_TopicVocDetail>();
-        }
-    
-        public int TopicVocId { get; set; }
-        public string TopicName { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public long VocHistoryId { get; set; }
+        public string VocHistoryContent { get; set; }
         public Nullable<int> ActiveFlag { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public Nullable<System.DateTime> DeleteTime { get; set; }
-        public Nullable<int> LevelID { get; set; }
-    
-        public virtual A_User A_User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<A_TopicVocDetail> A_TopicVocDetail { get; set; }
     }
 }

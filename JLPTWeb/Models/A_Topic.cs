@@ -28,6 +28,7 @@ namespace JLPTWeb.Models
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public Nullable<System.DateTime> DeleteTime { get; set; }
+        public Nullable<int> LevelID { get; set; }
     
         public virtual A_Country A_Country { get; set; }
         public virtual A_User A_User { get; set; }

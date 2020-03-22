@@ -97,6 +97,10 @@
             }
         </div>
                 }
+               @if (Model == null && ViewBag.lstVocSen != null)
+               {
+                    <p>Không tìm thấy kết quả. Trang sẽ sớm cập nhật. </p>
+                }
 
                 @*<ul class="list-group">
                         @{

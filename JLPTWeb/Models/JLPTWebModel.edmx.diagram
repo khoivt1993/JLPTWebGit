@@ -73,6 +73,7 @@
         <AssociationConnector Association="JLPTDatabaseDataModel.FK_A_Voc_Sen_A_Voc_Sen" ManuallyRouted="false" />
         <AssociationConnector Association="JLPTDatabaseDataModel.FK_M_Grammar_M_Level" ManuallyRouted="false" />
         <AssociationConnector Association="JLPTDatabaseDataModel.FK_M_GroupByBook_M_Level" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JLPTDatabaseDataModel.A_VocHistory" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
