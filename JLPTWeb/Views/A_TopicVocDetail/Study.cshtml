@@ -12,75 +12,8 @@
     @{int i = 1; }
     @foreach (var item in Model)
     {
-        @*<a href="\A_TopicVocDetail\StudyDetail?Id=@item.TopicId" class="list-group-item"><span class="label label-default">@i</span> @item.TopicName</a>*@
-        <button type="button" class="list-group-item" data-toggle="modal" data-target="#@item.TopicVocId"><span class="label label-default">@i</span> @item.TopicName</button>
+        <a href="\A_TopicVocDetail\StudyDetail?Id=@item.TopicVocId" target="_blank" class="list-group-item"><span class="label label-default">@i</span> @item.TopicName</a>
+        @*<button type="button" class="list-group-item" onclick="ViewDetail('@item.TopicVocId')"><span class="label label-default">@i</span> @item.TopicName</button>*@
         i = i + 1;
     }
 </div>
-<!-- Modal -->
-@foreach (var item in Model)
-{
-    <div class="modal fade" id="@item.TopicVocId" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title" style="color:orange">@item.TopicName</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="wrap-search">
-                        @{
-                            String contentTemp = "";
-                            String meanTemp = "";
-                            int count = 0;
-                            foreach (var itemTopicVocDetail in item.A_TopicVocDetail)
-                            {
-                                if (!contentTemp.Equals(itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocContent))
-                                {
-                                    contentTemp = itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocContent;
-                                    count++;
-                                    <h1 class="nihon-text-big">
-                                        <strong>
-                                            @count<span class="glyphicon glyphicon-flash"></span>
-                                            @Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocContent)
-                                            <span class="glyphicon glyphicon-minus"></span> @Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocHiragana)
-                                            【@Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocKanji)】
-                                        </strong>
-                                    </h1>
-                                    @*<div class="mean-text">
-                                            <div style="background-color:#f5f5f5">@Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocKind)</div>
-                                        </div>*@
-                                }
-
-                                if (!meanTemp.Equals(itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Mean.MeanContent))
-                                {
-                                    meanTemp = itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Mean.MeanContent;
-                                    <div class="mean-text">
-                                        @Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Mean.MeanContent)
-                                    </div>
-                                    if (itemTopicVocDetail.A_Voc_Sen.A_Sen_Mean != null)
-                                    {
-                                        <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
-                                    }
-                                }
-
-                                if (itemTopicVocDetail.A_Voc_Sen.A_Sen_Mean != null && itemTopicVocDetail.A_Voc_Sen.SenMeanId != ViewBag.NullSenMeanId)
-                                {
-                                    <div class="nihon-example">
-                                        <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Sen_Mean.A_Sentence.Sentence)
-                                    </div>
-                                    <div class="search-mean">
-                                        @Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Sen_Mean.A_Mean.MeanContent)
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-                            }

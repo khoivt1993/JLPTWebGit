@@ -32,7 +32,7 @@
         });
     </script>
 </head>
-<body>
+<body onmousemove="displayBtnSearch();" onmouseup="showBtnSearch(event);">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="50" style="box-shadow:0 1px 4px 0px #e1e1e1;background: #fff">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -192,6 +192,64 @@
             <h4 style="padding-left:20px"><a href="\B_News\Index" style="padding-top:20px;padding-bottom:20px">Đọc báo</a></h4>
         </div>
     </div>
+    <button id='showContent'  class="btn btn-default item-search" onclick="searchModal()">
+        <i class="glyphicon glyphicon-search" style="color:#CD5C5C"></i>
+    </button>
+    <div class="modal fade" id="searchModal" role="dialog" data-url='@Url.Action("SearchModal","A_Voc_Mean")'>
+    </div>
+    <script type="text/javascript">
+        function selectedText() {
+            var selectedText = '';
+
+            // window.getSelection 
+            if (window.getSelection) {
+                selectedText = window.getSelection();
+            }
+                // document.getSelection 
+            else if (document.getSelection) {
+                selectedText = document.getSelection();
+            }
+                // document.selection 
+            else if (document.selection) {
+                selectedText =
+                document.selection.createRange().text;
+            }
+            return selectedText;
+        }
+
+        function displayBtnSearch() {
+            var selectedText = this.selectedText();
+            if (selectedText == '') {
+                var d = document.getElementById('showContent');
+                d.style.display = "none";
+            }
+        }
+        function showBtnSearch(event) {
+            var selectedText = this.selectedText(); 
+            if (selectedText == '') {
+                var d = document.getElementById('showContent');
+                d.style.position = "absolute";
+                d.style.display = "none";
+            } else {
+                var d = document.getElementById('showContent');
+                d.style.position = "absolute";
+                d.style.display = "block";
+                d.style.left = event.screenX + $(window).scrollLeft() + 'px';
+                d.style.top = ((event.screenY + $(window).scrollTop())- 50)  + 'px';
+            }
+        }
+        
+        function searchModal() {
+            var d = document.getElementById('showContent');
+            d.style.display = "none";
+            var selectedText = this.selectedText();
+            var url = $('#searchModal').data('url') + "?ctrSearchVoc=" + selectedText;
+                $.get(url, function (data) {
+                    $("#searchModal").html(data);
+                    $("#searchModal").modal("show");
+                });
+            }
+    </script>
     <!-- partial -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
     <script type="text/javascript">

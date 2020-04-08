@@ -1,4 +1,4 @@
-﻿@model IEnumerable<JLPTWeb.Models.A_Voc_Mean>
+﻿@model IEnumerable<JLPTWeb.ViewModels.VocSenViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -22,101 +22,78 @@
 <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
 
 <div class="col-md-12" style="margin-bottom:10px;">
-    @*<ul class="list-group">
-            @if (Model != null)
-            {
-                String contentTemp = "";
-                foreach (var item in Model)
-                {
-                    if (!contentTemp.Equals(item.A_Vocabulary.VocContent))
+    @{
+        bool searchFlg = false;
+        if (Model != null && Model.Any())
+        {
+            <div class="wrap-search">
+                @{
+                    searchFlg = true;
+                    String contentTemp = "";
+                    String meanTemp = "";
+                    foreach (var item in Model)
                     {
-                        contentTemp = item.A_Vocabulary.VocContent;
-                        <li class="list-group-item list-group-item-warning">
-                            @Html.DisplayFor(modelItem => item.A_Vocabulary.VocContent)【@Html.DisplayFor(modelItem => item.A_Vocabulary.VocHiragana)】
-                        </li>
-                    }
-                    <li class="list-group-item">
-                        @Html.DisplayFor(modelItem => item.A_Mean.MeanContent)
-                    </li>
-                }
-            }
-        </ul>*@
-
-    @if (Model != null)
-    {
-        <div class="wrap-search">
-            @{
-                String contentTemp = "";
-                List<JLPTWeb.Models.A_Voc_Sen> lstVocSen = ViewBag.lstVocSen;
-                foreach (var item in Model)
-                {
-                    if (!contentTemp.Equals(item.A_Vocabulary.VocContent))
-                    {
-                        contentTemp = item.A_Vocabulary.VocContent;
-                        <h1 class="nihon-text-big"><strong>@Html.DisplayFor(modelItem => item.A_Vocabulary.VocContent) - @Html.DisplayFor(modelItem => item.A_Vocabulary.VocHiragana)【@Html.DisplayFor(modelItem => item.A_Vocabulary.VocKanji)】</strong></h1>
-                        <div class="mean-text">
-                            <div style="background-color:#f5f5f5; line-height:25px">@Html.DisplayFor(modelItem => item.A_Vocabulary.VocKind)</div>
-                        </div>
-                    }
-
-                    <div class="mean-text">
-                        <div style="background-color:#edc4c4; line-height:25px">@Html.DisplayFor(modelItem => item.A_Mean.MeanContent)</div>
-                    </div>
-                    if (lstVocSen != null)
-                    {
-                        foreach (var itemVocSen in lstVocSen)
+                        if (!contentTemp.Equals(item.VocContent))
                         {
-                            if (item.MeanId == itemVocSen.A_Voc_Mean.MeanId && itemVocSen.A_Voc_Mean.MeanId != ViewBag.NullSenMeanId)
+                            contentTemp = item.VocContent;
+                            <h1 class="nihon-text-big" style="margin-bottom:0px;">
+                                <strong>
+                                    @Html.DisplayFor(modelItem => item.VocContent)
+                                    <span class="glyphicon glyphicon-minus"></span> @Html.DisplayFor(modelItem => item.VocHiragana)
+                                    【@Html.DisplayFor(modelItem => item.VocKanji)】
+                                </strong>
+                            </h1>
+                        }
+                        if (!meanTemp.Equals(item.MeanContent))
+                        {
+                            meanTemp = item.MeanContent;
+                            <div class="mean-text">
+                                <div style="background-color:#f5f5f5; line-height:25px">@Html.DisplayFor(modelItem => item.VocKind)</div>
+                            </div>
+                            <div class="mean-text">
+                                <div style="background-color:#edc4c4; line-height:25px">@Html.DisplayFor(modelItem => item.MeanContent)</div>
+                            </div>
+                            if (item.Sentence != null)
                             {
-                                <div class="nihon-example">
-                                    <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => itemVocSen.A_Sen_Mean.A_Sentence.Sentence)
-                                </div>
-                                <div class="search-mean">
-                                    @Html.DisplayFor(modelItem => itemVocSen.A_Sen_Mean.A_Mean.MeanContent)
-                                </div>
+                                <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
                             }
                         }
+                        if (item.Sentence != null)
+                        {
+                            <div class="nihon-example">
+                                <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => item.Sentence)
+                            </div>
+                            <div class="search-mean">
+                                @Html.DisplayFor(modelItem => item.MeanSenContent)
+                            </div>
+                        }
                     }
                 }
-            }
-        </div>
-        <h3>Ví dụ tham khảo thêm</h3>
-        <div class="wrap-search">
-            @if (ViewBag.LstSenMean != null)
-            {
-                List<JLPTWeb.Models.A_Sen_Mean> lstSenMean = ViewBag.LstSenMean;
-                foreach (var item in lstSenMean)
-                {
-                    <div class="nihon-example">
-                        <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => item.A_Sentence.Sentence)
-                    </div>
-                    <div class="search-mean">
-                        @Html.DisplayFor(modelItem => item.A_Mean.MeanContent)
-                    </div>
-                }
-            }
-        </div>
-                }
-               @if (Model == null && ViewBag.lstVocSen != null)
-               {
-                    <p>Không tìm thấy kết quả. Trang sẽ sớm cập nhật. </p>
-                }
-
-                @*<ul class="list-group">
-                        @{
-                            List<JLPTWeb.Models.A_Sen_Mean> lstSenMean = ViewBag.LstSenMean;
-                        }
-                        @if (lstSenMean != null)
-                        {
-                            foreach (var item in lstSenMean)
-                            {
-                                <li class="list-group-item list-group-item-warning nihon-text">
-                                    @Html.DisplayFor(modelItem => item.A_Sentence.Sentence)
-                                </li>
-                                <li class="list-group-item mean-text">
-                                    @Html.DisplayFor(modelItem => item.A_Mean.MeanContent)
-                                </li>
-                            }
-                        }
-                    </ul>*@
             </div>
+                    }
+                    IQueryable<JLPTWeb.ViewModels.SenViewModel>
+                            lstSenMean = ViewBag.LstSenMean;
+                    if (lstSenMean != null && lstSenMean.Any())
+                    {
+                        searchFlg = true;
+                        <h3>Ví dụ tham khảo thêm</h3>
+                            <div class="wrap-search">
+                                @{
+                                    foreach (var item in lstSenMean)
+                                    {
+                                        <div class="nihon-example">
+                                            <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => item.Sentence)
+                                        </div>
+                                        <div class="search-mean">
+                                            @Html.DisplayFor(modelItem => item.MeanSenContent)
+                                        </div>
+                                    }
+                                }
+                            </div>
+                                    }
+                                    if (searchFlg == false && ViewBag.LstSenMean != null)
+                                    {
+                                        <p>Không tìm thấy kết quả. Trang sẽ sớm cập nhật. </p>
+                                    }
+    }
+</div>

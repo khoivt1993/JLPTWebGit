@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Web;
 using JLPTWeb.DAO;
 using JLPTWeb.Helper;
+using JLPTWeb.ViewModels;
 
 namespace JLPTWeb.Business
 {
@@ -36,6 +37,56 @@ namespace JLPTWeb.Business
             {
                 lstSenMean = tblSentences.Take(size).ToList();
                 lstSenMean = lstSenMean.OrderBy(s => s.SentenceId).ToList();
+            }
+
+            return lstSenMean;
+        }
+
+        public IQueryable<SenViewModel> getListSenViewModel(string strSearch, int size)
+        {
+            IQueryable<SenViewModel> lstSenMean;
+            //Thuc thi search theo gia tri tren man hinh
+            if (!String.IsNullOrEmpty(strSearch))
+            {
+                if (CommonHelper.checkUnicode(strSearch))
+                {
+                    lstSenMean = (from d in db.A_Sen_Mean
+                                  where d.A_Sentence.SenSearch.Contains(strSearch)
+                                  select new SenViewModel()
+                                  {
+                                      SentenceId = d.A_Sentence.SentenceId,
+                                      Sentence = d.A_Sentence.Sentence,
+                                      SenFormat = d.A_Sentence.SenFormat,
+                                      MeanSenContent = d.A_Mean.MeanContent
+                                  });
+                    lstSenMean = lstSenMean.Take(size).OrderBy(s => s.SentenceId);
+                }
+                else
+                {
+                    lstSenMean = (from d in db.A_Sen_Mean
+                                  where d.A_Mean.ContentSearch.Contains(strSearch)
+                                  select new SenViewModel()
+                                  {
+                                      
+                                      Sentence = d.A_Sentence.Sentence,
+                                      SenFormat = d.A_Sentence.SenFormat,
+                                      MeanId = d.A_Mean.MeanId,
+                                      MeanSenContent = d.A_Mean.MeanContent
+                                  });
+                    lstSenMean = lstSenMean.Take(size).OrderBy(s => s.MeanId);
+                }
+            }
+            else
+            {
+                lstSenMean = (from d in db.A_Sen_Mean
+                              select new SenViewModel()
+                              {
+                                  SentenceId = d.A_Sentence.SentenceId,
+                                  Sentence = d.A_Sentence.Sentence,
+                                  SenFormat = d.A_Sentence.SenFormat,
+                                  MeanSenContent = d.A_Mean.MeanContent
+                              });
+                lstSenMean = lstSenMean.Take(size).OrderBy(s => s.SentenceId);
             }
 
             return lstSenMean;

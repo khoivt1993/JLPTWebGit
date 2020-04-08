@@ -15,6 +15,7 @@ using HiraKana;
 using JLPTWeb.Business;
 using JLPTWeb.Properties;
 using System.IO;
+using JLPTWeb.ViewModels;
 
 namespace JLPTWeb.Controllers
 {
@@ -37,26 +38,49 @@ namespace JLPTWeb.Controllers
                 ctrSearchVoc = kanaTool.ToHiragana(ctrSearchVoc);
             }
             // get sentence 
-            List<A_Sen_Mean> lstSenMean = new List<A_Sen_Mean>();
             Sen_Mean_Bus senMeanBus = new Sen_Mean_Bus();
-            lstSenMean = senMeanBus.getListSentence(ctrSearchVoc, 10);
-            ViewBag.LstSenMean = lstSenMean.ToList();
+            IQueryable<SenViewModel> lstSenMean = senMeanBus.getListSenViewModel(ctrSearchVoc, 10);
+            ViewBag.LstSenMean = lstSenMean;
 
+            // D_Start 20200326 khoi-vt sua model view
             // get sentence of vocabulary
-            List<A_Voc_Sen> lstVocSen = new List<A_Voc_Sen>();
-            lstVocSen = db.A_Voc_Sen.Where(s => s.A_Sen_Mean.A_Sentence.SenSearch.Contains(ctrSearchVoc)).ToList();
-            ViewBag.lstVocSen = lstVocSen;
-            ViewBag.NullSenMeanId = Settings.Default.NullSenMeanId;
+            //List<A_Voc_Sen> lstVocSen = new List<A_Voc_Sen>();
+            //lstVocSen = db.A_Voc_Sen.Where(s => s.A_Sen_Mean.A_Sentence.SenSearch.Contains(ctrSearchVoc)).ToList();
+            //ViewBag.lstVocSen = lstVocSen;
+            //ViewBag.NullSenMeanId = Settings.Default.NullSenMeanId;
+            // D_End 20200326 khoi-vt sua model view
 
             //get data tu DB truong hop khong ton tai get tu mazii
             //var a_Voc_Mean = db.A_Voc_Mean.Include(a => a.A_Mean).Include(a => a.A_User).Include(a => a.A_User1).Include(a => a.A_Vocabulary);
             //var a_Voc_Mean = db.A_Voc_Mean.Where(a => a.A_Vocabulary.VocContent.Equals(ctrSearchVoc) || a.A_Vocabulary.VocHiragana.Equals(ctrSearchVoc));
-            List<A_Voc_Mean> lstVocMean = new List<A_Voc_Mean>();
-            lstVocMean = db.A_Voc_Mean.Where(a => a.A_Vocabulary.VocContent.Equals(ctrSearchVoc) || a.A_Vocabulary.VocHiragana.Equals(ctrSearchVoc)).ToList();
-            if (lstVocMean.Count > 0)
+            // U_Start 20200326 khoi-vt sua model view
+            //List<A_Voc_Mean> lstVocMean = new List<A_Voc_Mean>();
+            //lstVocMean = db.A_Voc_Mean.Where(a => a.A_Vocabulary.VocContent == ctrSearchVoc || a.A_Vocabulary.VocHiragana == ctrSearchVoc).ToList();
+            //if (lstVocMean.Count > 0)
+            //{
+            //    return View(lstVocMean);
+            //}
+            IQueryable<VocSenViewModel> lstVocSen = (from m in db.A_Voc_Mean
+                                                     join d in db.A_Voc_Sen on m.VocMeanId equals d.VocMeanId into tblVocSen
+                                                     from d in tblVocSen.DefaultIfEmpty()
+                                                     where m.A_Vocabulary.VocContent == ctrSearchVoc || m.A_Vocabulary.VocHiragana == ctrSearchVoc
+                                                     select new VocSenViewModel()
+                                                     {
+                                                         VocContent = m.A_Vocabulary.VocContent,
+                                                         VocKanji = m.A_Vocabulary.VocKanji,
+                                                         VocHiragana = m.A_Vocabulary.VocHiragana,
+                                                         VocKind = m.A_Vocabulary.VocKind,
+                                                         MeanContent = m.A_Mean.MeanContent,
+                                                         Sentence = d.A_Sen_Mean.A_Sentence.Sentence,
+                                                         SenFormat = d.A_Sen_Mean.A_Sentence.SenFormat,
+                                                         MeanSenContent = d.A_Sen_Mean.A_Mean.MeanContent
+                                                     });
+
+            if (lstVocSen != null)
             {
-                return View(lstVocMean);
+                return View(lstVocSen);
             }
+            // U_End 20200326 khoi-vt sua model view
             // U_Start 20200322 Khoi-VT sua add vao table history
             //Translate_Bus tranBus = new Translate_Bus();
             //tranBus.getDataFromApi(ctrSearchVoc);
@@ -89,6 +113,57 @@ namespace JLPTWeb.Controllers
             return View();
             // U_End 20200322 Khoi-VT sua add vao table history
         }
+        public ActionResult SearchModal(string ctrSearchVoc)
+        {
+            if ("".Equals(ctrSearchVoc))
+            {
+                return PartialView();
+            }
+            // khi serch bang romaji se chuyen sang hiragana
+            KanaTools kanaTool = new KanaTools();
+            if (kanaTool.IsRomaji(ctrSearchVoc))
+            {
+                ctrSearchVoc = kanaTool.ToHiragana(ctrSearchVoc);
+            }
+            // get sentence 
+            Sen_Mean_Bus senMeanBus = new Sen_Mean_Bus();
+            IQueryable<SenViewModel> lstSenMean = senMeanBus.getListSenViewModel(ctrSearchVoc, 10);
+            ViewBag.LstSenMean = lstSenMean;
+            
+            IQueryable<VocSenViewModel> lstVocSen = (from m in db.A_Voc_Mean
+                                                     join d in db.A_Voc_Sen on m.VocMeanId equals d.VocMeanId into tblVocSen
+                                                     from d in tblVocSen.DefaultIfEmpty()
+                                                     where m.A_Vocabulary.VocContent == ctrSearchVoc || m.A_Vocabulary.VocHiragana == ctrSearchVoc
+                                                     select new VocSenViewModel()
+                                                     {
+                                                         VocContent = m.A_Vocabulary.VocContent,
+                                                         VocKanji = m.A_Vocabulary.VocKanji,
+                                                         VocHiragana = m.A_Vocabulary.VocHiragana,
+                                                         VocKind = m.A_Vocabulary.VocKind,
+                                                         MeanContent = m.A_Mean.MeanContent,
+                                                         Sentence = d.A_Sen_Mean.A_Sentence.Sentence,
+                                                         SenFormat = d.A_Sen_Mean.A_Sentence.SenFormat,
+                                                         MeanSenContent = d.A_Sen_Mean.A_Mean.MeanContent
+                                                     });
+
+            if (lstVocSen != null)
+            {
+                return PartialView(lstVocSen);
+            }
+            if (!db.A_VocHistory.Any(s => s.VocHistoryContent == ctrSearchVoc))
+            {
+                A_VocHistory vocHis = new A_VocHistory();
+                vocHis.VocHistoryContent = ctrSearchVoc;
+                vocHis.ActiveFlag = 1;
+                vocHis.CreateTime = DateTime.Now;
+                vocHis.UpdateTime = DateTime.Now;
+                db.A_VocHistory.Add(vocHis);
+                db.SaveChanges();
+            }
+            return PartialView();
+            // U_End 20200322 Khoi-VT sua add vao table history
+        }
+
         // GET: A_Voc_Mean
         public ActionResult Index()
         {

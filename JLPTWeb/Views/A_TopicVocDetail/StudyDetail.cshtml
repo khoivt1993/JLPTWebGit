@@ -1,0 +1,42 @@
+﻿@model IQueryable<JLPTWeb.ViewModels.VocSenViewModel>
+@using JLPTWeb.Properties;
+@{
+    ViewBag.Title = "StudyDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h3 style="color:orange">@Model.TopicName</h3>*@
+<div class="wrap-search">
+    @{
+        String contentTemp = "";
+        int count = 0;
+        foreach (var itemTopicVocDetail in Model)
+        {
+            if (!contentTemp.Equals(itemTopicVocDetail.VocContent))
+            {
+                contentTemp = itemTopicVocDetail.VocContent;
+                count++;
+                <h1 class="nihon-text-big">
+                    <strong>
+                        @count<span class="glyphicon glyphicon-flash"></span>
+                        @Html.DisplayFor(modelItem => itemTopicVocDetail.VocContent)
+                        <span class="glyphicon glyphicon-minus"></span> @Html.DisplayFor(modelItem => itemTopicVocDetail.VocHiragana)
+                        【@Html.DisplayFor(modelItem => itemTopicVocDetail.VocKanji)】
+                    </strong>
+                </h1>
+                @*<div class="mean-text">
+                        <div style="background-color:#f5f5f5">@Html.DisplayFor(modelItem => itemTopicVocDetail.A_Voc_Sen.A_Voc_Mean.A_Vocabulary.VocKind)</div>
+                    </div>*@
+                <div class="mean-text">
+                    @Html.DisplayFor(modelItem => itemTopicVocDetail.MeanContent)
+                </div>
+                <div class="col-md-12"><hr style="width:100%;border-width:2px;border-color:#CD5C5C" /></div>
+            }
+            <div class="nihon-example">
+                <span class="glyphicon glyphicon-hand-right"></span> @Html.DisplayFor(modelItem => itemTopicVocDetail.Sentence)
+            </div>
+            <div class="search-mean">
+                @Html.DisplayFor(modelItem => itemTopicVocDetail.MeanSenContent)
+            </div>
+        }
+    }
+</div>

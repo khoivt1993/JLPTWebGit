@@ -312,6 +312,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\SenViewModel.cs" />
+    <Compile Include="ViewModels\VocSenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -403,6 +405,10 @@
     <Content Include="Views\Shared\_Layout_NotRight.cshtml" />
     <Content Include="Views\A_TopicVocDetail\Study.cshtml" />
     <Content Include="Views\A_Voc_Mean_Admin\Create.cshtml" />
+    <Content Include="Views\A_TopicVocDetail\StudyDetail.cshtml" />
+    <Content Include="Views\A_TopicVocDetail\StudyDetailModal.cshtml" />
+    <Content Include="Views\A_TopicVocDetail\StudyDetail_BK.cshtml" />
+    <Content Include="Views\A_Voc_Mean\SearchModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -438,7 +444,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>36255</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:36255/</IISUrl>
+          <IISUrl>http://localhost:36254/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
